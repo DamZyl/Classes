@@ -17,5 +17,13 @@ namespace PlainClasses.Domain.Models.Utils
         {
             _domainEvents?.Clear();
         }
+        
+        protected static void CheckRule(IBusinessRule rule)
+        {
+            if (rule.IsBroken())
+            {
+                throw new BusinessRuleValidationException(rule);
+            }
+        }
     }
 }

@@ -10,6 +10,33 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.PersonalNumber)
+                .HasMaxLength(11)
+                .IsRequired();
+            
+            builder.Property(x => x.FirstName)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Property(x => x.LastName)
+                .HasMaxLength(70)
+                .IsRequired();
+
+            builder.Property(x => x.FatherName)
+                .HasMaxLength(50)
+                .IsRequired();
+            
+            builder.Property(x => x.PersonalPhoneNumber)
+                .HasMaxLength(15)
+                .IsRequired();
+
+            builder.Property(x => x.WorkPhoneNumber)
+                .HasMaxLength(15);
+
+            builder.Property(x => x.MilitaryRankAcr)
+                .HasMaxLength(15)
+                .IsRequired();
+
             builder.HasOne(x => x.MilitaryRank)
                 .WithMany(x => x.Persons)
                 .HasForeignKey(x => x.MilitaryRankId);
@@ -19,7 +46,8 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
                 .HasForeignKey(x => x.PlatoonId);
             
             builder.Property(x => x.Position)
-                .HasConversion<string>();
+                .HasConversion<string>()
+                .IsRequired();
         }
     }
 }
