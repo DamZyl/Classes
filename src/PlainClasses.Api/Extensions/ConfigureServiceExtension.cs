@@ -6,17 +6,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlainClasses.Api.Utils;
-using PlainClasses.Domain.Repositories;
-using PlainClasses.Infrastructure.Auths;
+using PlainClasses.Infrastructure.Databases.Sql;
 using PlainClasses.Infrastructure.Options;
-using PlainClasses.Infrastructure.Repositories;
 
 namespace PlainClasses.Api.Extensions
 {
     public static class ConfigureServiceExtension
     {
-        public static void AddSqlConfiguration(this IServiceCollection services, IConfiguration configuration, string section)
-            => services.Configure<SqlOption>(x => configuration.GetSection(section).Bind(x));
+        public static void AddSql(this IServiceCollection services, IConfiguration configuration, string section)
+        {
+            services.Configure<SqlOption>(x => configuration.GetSection(section).Bind(x));
+            services.AddDbContext<PlainClassesContext>();
+        }
         
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration, string section)
         {
@@ -37,18 +38,6 @@ namespace PlainClasses.Api.Extensions
                     };
                 });
         }
-        
-        public static void AddRepository(this IServiceCollection services)
-            => services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-        
-        public static void AddUnitOfWork(this IServiceCollection services)
-            => services.AddScoped<IUnitOfWork, UnitOfWork>();
-        
-        public static void AddJwt(this IServiceCollection services)
-            => services.AddScoped<IJwtHandler, JwtHandler>();
-        
-        public static void AddPasswordHasher(this IServiceCollection services)
-            => services.AddScoped<IPasswordHasher, PasswordHasher>();
         
         public static void AddSwagger(this IServiceCollection services)
         {

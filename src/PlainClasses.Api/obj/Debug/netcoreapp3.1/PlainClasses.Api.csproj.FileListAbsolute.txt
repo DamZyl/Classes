@@ -101,3 +101,5 @@ C:/Users/damia/Documents/Codes/DotNet/PlainClasses/src/PlainClasses.Api/obj/Debu
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/MediatR.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/MediatR.Extensions.Microsoft.DependencyInjection.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Autofac.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Autofac.Extensions.DependencyInjection.dll

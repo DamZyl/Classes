@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "NT2dXehiRI6NMVg1KutDUlosSx8cRLGcqg+KDDGQ7SqwyDKcLwkQBe1H6rF0TjAM/YFBReGWJlj/qfgskIOVzg==",
+  "dgSpecHash": "7o6JK4G7UMV2ScW3buWKztpc4BFHW+zIcHvVtsvbU+ML1T7/tCukYsSLl/PaBvCQXJV+vWRSy56bthnpv8Vbqw==",
   "success": true,
   "projectFilePath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/PlainClasses.Api.csproj",
   "expectedPackageFiles": [
+    "/home/damian/.nuget/packages/autofac/6.1.0/autofac.6.1.0.nupkg.sha512",
+    "/home/damian/.nuget/packages/autofac.extensions.dependencyinjection/7.1.0/autofac.extensions.dependencyinjection.7.1.0.nupkg.sha512",
     "/home/damian/.nuget/packages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
     "/home/damian/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/9.0.0/mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.10/microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",

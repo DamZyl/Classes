@@ -2,7 +2,6 @@ namespace PlainClasses.Api.Utils
 {
     public static class Consts
     {
-        public const string ApplicationAssemblyPath = "bin/Debug/netcoreapp3.1/PlainClasses.Application.dll";
         public const string ApiVersion = "v1";
         public const string ApiTitle = "My API";
         public const string ApiName = "My API V1";
