@@ -60,16 +60,16 @@ namespace PlainClasses.Domain.Models
         public static Person CreatePerson(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string firstName, 
             string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
         {
-            // CheckRule(new PersonalNumberValidRule(personalNumber));   
-            // CheckRule(new EmptyFieldRule(firstName));
-            // CheckRule(new EmptyFieldRule(lastName));
-            // CheckRule(new EmptyFieldRule(fatherName));
-            // CheckRule(new OverEighteenRule(birthDate));
-            // CheckRule(new EmptyFieldRule(workPhoneNumber));
-            // CheckRule(new NumberFormatRule(workPhoneNumber));
-            // CheckRule(new EmptyFieldRule(personalPhoneNumber));
-            // CheckRule(new NumberFormatRule(personalPhoneNumber));
-            // CheckRule(new PersonPositionRule(position));
+            CheckRule(new PersonalNumberValidRule(personalNumber));   
+            CheckRule(new EmptyFieldRule(firstName));
+            CheckRule(new EmptyFieldRule(lastName));
+            CheckRule(new EmptyFieldRule(fatherName));
+            CheckRule(new OverEighteenRule(birthDate));
+            CheckRule(new EmptyFieldRule(workPhoneNumber));
+            CheckRule(new NumberFormatRule(workPhoneNumber));
+            CheckRule(new EmptyFieldRule(personalPhoneNumber));
+            CheckRule(new NumberFormatRule(personalPhoneNumber));
+            CheckRule(new PersonPositionRule(position));
             
             return new Person(militaryRank, platoon, personalNumber, firstName, lastName, fatherName, birthDate, 
                 workPhoneNumber, personalPhoneNumber, position);

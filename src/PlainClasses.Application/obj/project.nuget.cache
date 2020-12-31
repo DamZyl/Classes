@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "eZu8Z+W4+c0ZiqzuyIYKPP7+Nzzfk7/7dHLvuIZSrm9MKqtgFJcEwGeG0NxoTzdd2dW4pd2uWGmBJY5irjKLjw==",
+  "dgSpecHash": "GwQHjzIkV+eIyZyL1cZLrWnQrO84ztljZoQjWEn5PLKTrdoUQP30T6QkB81V6WWjzSPJWe+iuAo3u2gbrTO+qA==",
   "success": true,
   "projectFilePath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/PlainClasses.Application.csproj",
   "expectedPackageFiles": [
-    "/home/damian/.nuget/packages/autofac/6.1.0/autofac.6.1.0.nupkg.sha512",
+    "/home/damian/.nuget/packages/fluentvalidation/9.3.0/fluentvalidation.9.3.0.nupkg.sha512",
     "/home/damian/.nuget/packages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.10/microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

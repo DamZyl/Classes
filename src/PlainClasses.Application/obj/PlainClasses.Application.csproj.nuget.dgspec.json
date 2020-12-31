@@ -40,13 +40,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Autofac": {
+            "FluentValidation": {
               "target": "Package",
-              "version": "[6.1.0, )"
-            },
-            "MediatR": {
-              "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.3.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -107,6 +103,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.9, )"

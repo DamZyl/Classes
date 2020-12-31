@@ -12,7 +12,7 @@ namespace PlainClasses.Domain.Models.Rules
             _birthDate = birthDate;
         }
 
-        public bool IsBroken() => _birthDate < DateTime.Now.AddYears(-18);
+        public bool IsBroken() => _birthDate >= DateTime.Now.AddYears(-18);
 
         public string Message => "Person should be over 18 years of age.";
     }

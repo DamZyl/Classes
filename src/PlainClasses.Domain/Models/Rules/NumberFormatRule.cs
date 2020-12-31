@@ -17,7 +17,7 @@ namespace PlainClasses.Domain.Models.Rules
         {
             var regex = new Regex(Consts.PhoneNumberRegex);
 
-            return regex.IsMatch(_phoneNumber);
+            return !regex.IsMatch(_phoneNumber);
         }
 
         public string Message => "PhoneNumber should have format 'xxx-xxx-xxx'.";

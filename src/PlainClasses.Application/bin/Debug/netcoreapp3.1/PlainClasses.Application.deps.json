@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "PlainClasses.Application/1.0.0": {
         "dependencies": {
-          "Autofac": "6.1.0",
-          "MediatR": "9.0.0",
+          "FluentValidation": "9.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.10",
           "PlainClasses.Domain": "1.0.0"
         },
@@ -17,14 +16,11 @@
           "PlainClasses.Application.dll": {}
         }
       },
-      "Autofac/6.1.0": {
-        "dependencies": {
-          "System.Diagnostics.DiagnosticSource": "4.7.1"
-        },
+      "FluentValidation/9.3.0": {
         "runtime": {
-          "lib/netstandard2.1/Autofac.dll": {
-            "assemblyVersion": "6.1.0.0",
-            "fileVersion": "6.1.0.0"
+          "lib/netstandard2.0/FluentValidation.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.3.0.0"
           }
         }
       },
@@ -745,6 +741,7 @@
       },
       "PlainClasses.Domain/1.0.0": {
         "dependencies": {
+          "MediatR": "9.0.0",
           "Microsoft.EntityFrameworkCore": "3.1.9"
         },
         "runtime": {
@@ -759,12 +756,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Autofac/6.1.0": {
+    "FluentValidation/9.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-22aXncFDye08TsXHobcxAoZFBeaJ9nrAxGzk9YHLLaIkYO7aeAA0Sz7Mii9qsfB76S1gdhebqMv8QsnknJMT/w==",
-      "path": "autofac/6.1.0",
-      "hashPath": "autofac.6.1.0.nupkg.sha512"
+      "sha512": "sha512-C44l6Ih+YwpED/TsXfl6LIq6Z4wLXahstnr6T70uUg1Hs7/bLBKKAo9Nl0sLhVjDE8TA+fF+O3IM4nDrwabcSQ==",
+      "path": "fluentvalidation/9.3.0",
+      "hashPath": "fluentvalidation.9.3.0.nupkg.sha512"
     },
     "MediatR/9.0.0": {
       "type": "package",
