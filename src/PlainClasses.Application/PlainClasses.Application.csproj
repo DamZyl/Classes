@@ -6,10 +6,10 @@
 
    <ItemGroup>
     <ProjectReference Include="..\PlainClasses.Domain\PlainClasses.Domain.csproj" />
-    <ProjectReference Include="..\PlainClasses.Infrastructure\PlainClasses.Infrastructure.csproj" />
   </ItemGroup>
 
    <ItemGroup>
+     <PackageReference Include="MediatR" Version="9.0.0" />
      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
    </ItemGroup>
 

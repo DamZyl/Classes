@@ -15,6 +15,7 @@ namespace PlainClasses.Domain.Models
         public Guid MilitaryRankId { get; private set; }
         public Guid PlatoonId { get; private set; }
         public string MilitaryRankAcr { get; private set; }
+        public string PlatoonAcr { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string FatherName { get; private set; }
@@ -44,13 +45,14 @@ namespace PlainClasses.Domain.Models
             MilitaryRankId = militaryRank.Id;
             PlatoonId = platoon.Id;
             MilitaryRankAcr = militaryRank.Acronym;
+            PlatoonAcr = platoon.Acronym;
             FirstName = firstName.ToUppercaseFirstInvariant();
             LastName = lastName.ToUppercaseFirstInvariant();
             FatherName = fatherName.ToUppercaseFirstInvariant();
             BirthDate = birthDate;
             WorkPhoneNumber = workPhoneNumber;
             PersonalPhoneNumber = personalPhoneNumber;
-            Position = Enum.Parse<PersonPosition>(position);
+            Position = Enum.Parse<PersonPosition>(position.ToUppercaseFirstInvariant());
             
             AddDomainEvent(new PersonCreatedEvent(Id));
         }
@@ -58,16 +60,16 @@ namespace PlainClasses.Domain.Models
         public static Person CreatePerson(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string firstName, 
             string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
         {
-            CheckRule(new PersonalNumberValidRule(personalNumber));   
-            CheckRule(new EmptyFieldRule(firstName));
-            CheckRule(new EmptyFieldRule(lastName));
-            CheckRule(new EmptyFieldRule(fatherName));
-            CheckRule(new OverEighteenRule(birthDate));
-            CheckRule(new EmptyFieldRule(workPhoneNumber));
-            CheckRule(new NumberFormatRule(workPhoneNumber));
-            CheckRule(new EmptyFieldRule(personalPhoneNumber));
-            CheckRule(new NumberFormatRule(personalPhoneNumber));
-            CheckRule(new PersonPositionRule(position));
+            // CheckRule(new PersonalNumberValidRule(personalNumber));   
+            // CheckRule(new EmptyFieldRule(firstName));
+            // CheckRule(new EmptyFieldRule(lastName));
+            // CheckRule(new EmptyFieldRule(fatherName));
+            // CheckRule(new OverEighteenRule(birthDate));
+            // CheckRule(new EmptyFieldRule(workPhoneNumber));
+            // CheckRule(new NumberFormatRule(workPhoneNumber));
+            // CheckRule(new EmptyFieldRule(personalPhoneNumber));
+            // CheckRule(new NumberFormatRule(personalPhoneNumber));
+            // CheckRule(new PersonPositionRule(position));
             
             return new Person(militaryRank, platoon, personalNumber, firstName, lastName, fatherName, birthDate, 
                 workPhoneNumber, personalPhoneNumber, position);

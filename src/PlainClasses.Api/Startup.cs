@@ -1,14 +1,14 @@
 using System;
+using System.Reflection;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using PlainClasses.Api.Extensions;
 using PlainClasses.Api.Utils;
 using PlainClasses.Infrastructure.Databases.Sql;
-using PlainClasses.Infrastructure.Options;
 
 namespace PlainClasses.Api
 {
@@ -28,6 +28,7 @@ namespace PlainClasses.Api
             
             services.AddJwtConfiguration(Configuration, Consts.JwtConfigurationSection);
             
+            services.AddMediatR(Assembly.LoadFrom(Consts.ApplicationAssemblyPath));
             services.AddRepository();
             services.AddUnitOfWork();
             services.AddPasswordHasher();

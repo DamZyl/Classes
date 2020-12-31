@@ -98,3 +98,6 @@ C:/Users/damia/Documents/Codes/DotNet/PlainClasses/src/PlainClasses.Api/obj/Debu
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/obj/Debug/netcoreapp3.1/PlainClasses.Api.pdb
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/obj/Debug/netcoreapp3.1/PlainClasses.Api.genruntimeconfig.cache
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Design.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/MediatR.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/MediatR.Extensions.Microsoft.DependencyInjection.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll

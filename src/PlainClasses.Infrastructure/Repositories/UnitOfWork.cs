@@ -18,7 +18,7 @@ namespace PlainClasses.Infrastructure.Repositories
             _context = context;
         }
         
-        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class, IAggregateRoot
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : Entity
         {
             if (_repositories.Keys.Contains(typeof(TEntity)))
             {

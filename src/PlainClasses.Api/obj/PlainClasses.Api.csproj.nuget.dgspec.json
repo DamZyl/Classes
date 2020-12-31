@@ -27,6 +27,9 @@
             "projectReferences": {
               "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/PlainClasses.Application.csproj": {
                 "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/PlainClasses.Application.csproj"
+              },
+              "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/PlainClasses.Infrastructure.csproj": {
+                "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/PlainClasses.Infrastructure.csproj"
               }
             }
           }
@@ -40,6 +43,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.10, )"
@@ -100,9 +111,6 @@
             "projectReferences": {
               "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Domain/PlainClasses.Domain.csproj": {
                 "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Domain/PlainClasses.Domain.csproj"
-              },
-              "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/PlainClasses.Infrastructure.csproj": {
-                "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/PlainClasses.Infrastructure.csproj"
               }
             }
           }
@@ -116,6 +124,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.10, )"
@@ -220,6 +232,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/PlainClasses.Application.csproj": {
+                "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/PlainClasses.Application.csproj"
+              },
               "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Domain/PlainClasses.Domain.csproj": {
                 "projectPath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Domain/PlainClasses.Domain.csproj"
               }

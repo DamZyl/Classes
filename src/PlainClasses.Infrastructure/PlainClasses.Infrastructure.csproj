@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlainClasses.Domain\PlainClasses.Domain.csproj" />
+    <ProjectReference Include="..\PlainClasses.Application\PlainClasses.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

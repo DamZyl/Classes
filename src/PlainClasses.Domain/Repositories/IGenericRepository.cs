@@ -8,7 +8,7 @@ using PlainClasses.Domain.Models.Utils;
 
 namespace PlainClasses.Domain.Repositories
 {
-    public interface IGenericRepository<TEntity> where TEntity : class, IAggregateRoot
+    public interface IGenericRepository<TEntity> where TEntity : Entity
     {
         Task AddAsync(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);

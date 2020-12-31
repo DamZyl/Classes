@@ -5,7 +5,7 @@ namespace PlainClasses.Domain.Repositories
 {
     public interface IUnitOfWork
     {
-        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class, IAggregateRoot;
+        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : Entity;
 
         Task<int> CommitAsync();
 

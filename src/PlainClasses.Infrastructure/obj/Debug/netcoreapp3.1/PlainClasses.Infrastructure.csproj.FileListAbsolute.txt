@@ -25,3 +25,5 @@ C:/Users/damia/Documents/Codes/DotNet/PlainClasses/src/PlainClasses.Infrastructu
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/obj/Debug/netcoreapp3.1/PlainClasses.Infrastructure.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/obj/Debug/netcoreapp3.1/PlainClasses.Infrastructure.pdb
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/obj/Debug/netcoreapp3.1/PlainClasses.Infrastructure.genruntimeconfig.cache
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/bin/Debug/netcoreapp3.1/PlainClasses.Application.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Infrastructure/bin/Debug/netcoreapp3.1/PlainClasses.Application.pdb

@@ -10,7 +10,7 @@ namespace PlainClasses.Application.Extensions
 {
     public static class RepositoryExtension
     {
-        public static async Task<TEntity> GetOrFailAsync<TEntity>(this IGenericRepository<TEntity> repository, Guid id) where TEntity : class, IAggregateRoot 
+        public static async Task<TEntity> GetOrFailAsync<TEntity>(this IGenericRepository<TEntity> repository, Guid id) where TEntity : Entity
         {
             var entity = await repository.FindByIdAsync(id);
 
@@ -23,7 +23,7 @@ namespace PlainClasses.Application.Extensions
         }
         
         public static async Task<TEntity> GetOrFailAsync<TEntity>(this IGenericRepository<TEntity> repository, 
-            Expression<Func<TEntity, bool>> predicate) where TEntity : class, IAggregateRoot
+            Expression<Func<TEntity, bool>> predicate) where TEntity : Entity
         {
             var entity = await repository.FindByAsync(predicate);
 
@@ -36,7 +36,7 @@ namespace PlainClasses.Application.Extensions
         }
         
         public static async Task<TEntity> GetOrFailWithCheckExistsAsync<TEntity>(this IGenericRepository<TEntity> repository, 
-            Expression<Func<TEntity, bool>> predicate) where TEntity : class, IAggregateRoot 
+            Expression<Func<TEntity, bool>> predicate) where TEntity : Entity 
         {
             var entity = await repository.FindByAsync(predicate);
 
@@ -50,7 +50,7 @@ namespace PlainClasses.Application.Extensions
         
         public static async Task<TEntity> GetOrFailWithIncludesAsync<TEntity>(this IGenericRepository<TEntity> repository, 
             Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes) 
-            where TEntity : class, IAggregateRoot 
+            where TEntity : Entity
         {
             var entity = await repository.FindByWithIncludesAsync(predicate, includes);
 

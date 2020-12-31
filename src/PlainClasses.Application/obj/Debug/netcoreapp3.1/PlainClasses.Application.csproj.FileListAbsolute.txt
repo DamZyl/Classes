@@ -16,9 +16,7 @@ C:/Users/damia/Documents/Codes/DotNet/PlainClasses/src/PlainClasses.Application/
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Application.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Application.pdb
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Domain.dll
-/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Infrastructure.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Domain.pdb
-/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/bin/Debug/netcoreapp3.1/PlainClasses.Infrastructure.pdb
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/obj/Debug/netcoreapp3.1/PlainClasses.Application.csprojAssemblyReference.cache
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/obj/Debug/netcoreapp3.1/PlainClasses.Application.AssemblyInfoInputs.cache
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Application/obj/Debug/netcoreapp3.1/PlainClasses.Application.AssemblyInfo.cs

@@ -2,6 +2,6 @@
 {
     public enum PersonPosition
     {
-        
+        Słuchacz = 0
     }
 }
