@@ -7,10 +7,10 @@ namespace PlainClasses.Domain.Models
 {
     public class PersonFunction : Entity
     {
-        public Guid Id { get; set; }
-        public Guid PersonId { get; set; }
-        public Guid EduBlockId { get; set; }
-        public Function Function { get; set; }
+        public Guid Id { get; private set; }
+        public Guid PersonId { get; private set; }
+        public Guid EduBlockId { get; private set; }
+        public Function Function { get; private set; }
 
         #region Ef_Config
         

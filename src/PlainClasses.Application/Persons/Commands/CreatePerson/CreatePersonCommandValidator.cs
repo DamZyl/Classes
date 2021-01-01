@@ -14,27 +14,34 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
             RuleFor(x => x.PersonalNumber)
                 .Length(11)
                 .WithMessage("PersonalNumber should have 11 digits.");
+            
             RuleFor(x => x.MilitaryRankId)
                 .NotEmpty()
                 .WithMessage("MilitaryRankId is empty.");
+            
             RuleFor(x => x.PlatoonId)
                 .NotEmpty()
                 .WithMessage("PlatoonId is empty.");
+            
             RuleFor(x => x.FirstName)
                 .NotEmpty()
                 .WithMessage("FirstName is empty.");
+            
             RuleFor(x => x.LastName)
                 .NotEmpty()
                 .WithMessage("LastName is empty.");
+            
             RuleFor(x => x.FatherName)
                 .NotEmpty()
                 .WithMessage("FatherName is empty.");
+            
             RuleFor(x => x.PersonalPhoneNumber)
                 .NotEmpty()
                 .WithMessage("PersonalPhoneNumber is empty.");
             RuleFor(x => x.PersonalPhoneNumber)
                 .Must(CheckPhoneNumberFormat)
                 .WithMessage("PersonalPhoneNumber should have format 'xxx-xxx-xxx'.");
+            
             RuleFor(x => x.WorkPhoneNumber)
                 .NotEmpty()
                 .WithMessage("WorkPhoneNumber is empty");
