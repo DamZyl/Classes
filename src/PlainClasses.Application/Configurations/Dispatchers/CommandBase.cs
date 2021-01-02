@@ -1,6 +1,6 @@
 using System;
 
-namespace PlainClasses.Application.Dispatchers
+namespace PlainClasses.Application.Configurations.Dispatchers
 {
     public class CommandBase : ICommand
     {

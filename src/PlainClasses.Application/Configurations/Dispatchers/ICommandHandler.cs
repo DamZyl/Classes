@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace PlainClasses.Application.Dispatchers
+namespace PlainClasses.Application.Configurations.Dispatchers
 {
     public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand> where TCommand : ICommand { }
 

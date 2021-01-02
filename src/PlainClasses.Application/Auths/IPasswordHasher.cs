@@ -1,4 +1,4 @@
-namespace PlainClasses.Infrastructure.Auths
+namespace PlainClasses.Application.Auths
 {
     public interface IPasswordHasher
     {

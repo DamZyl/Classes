@@ -27,7 +27,6 @@ namespace PlainClasses.Api
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddSql(Configuration, Consts.DbConfigurationSection);
             services.AddJwtConfiguration(Configuration, Consts.JwtConfigurationSection);
             services.AddControllers();
             services.AddSwagger();

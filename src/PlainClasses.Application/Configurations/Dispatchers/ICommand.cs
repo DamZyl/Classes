@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace PlainClasses.Application.Dispatchers
+namespace PlainClasses.Application.Configurations.Dispatchers
 {
     public interface ICommand : IRequest
     {

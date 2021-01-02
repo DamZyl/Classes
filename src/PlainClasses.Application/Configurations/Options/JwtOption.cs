@@ -1,4 +1,4 @@
-namespace PlainClasses.Infrastructure.Options
+namespace PlainClasses.Application.Configurations.Options
 {
     public class JwtOption
     {

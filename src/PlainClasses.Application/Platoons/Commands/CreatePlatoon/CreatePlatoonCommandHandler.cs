@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
+using PlainClasses.Application.Configurations.Dispatchers;
 
 namespace PlainClasses.Application.Platoons.Commands.CreatePlatoon
 {
-    public class CreatePlatoonCommandHandler : IRequestHandler<CreatePlatoonCommand, ReturnPlatoonViewModel>
+    public class CreatePlatoonCommandHandler : ICommandHandler<CreatePlatoonCommand, ReturnPlatoonViewModel>
     {
         public Task<ReturnPlatoonViewModel> Handle(CreatePlatoonCommand request, CancellationToken cancellationToken)
         {

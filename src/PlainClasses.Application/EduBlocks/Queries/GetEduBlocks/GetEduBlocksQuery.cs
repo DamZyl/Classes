@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using PlainClasses.Application.Dispatchers;
+using PlainClasses.Application.Configurations.Dispatchers;
 
 namespace PlainClasses.Application.EduBlocks.Queries.GetEduBlocks
 {

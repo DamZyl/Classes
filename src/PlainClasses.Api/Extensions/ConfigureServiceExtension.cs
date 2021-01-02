@@ -7,18 +7,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlainClasses.Api.Utils;
 using PlainClasses.Infrastructure.Databases.Sql;
-using PlainClasses.Infrastructure.Options;
+using PlainClasses.Application.Configurations.Options;
 
 namespace PlainClasses.Api.Extensions
 {
     public static class ConfigureServiceExtension
     {
-        public static void AddSql(this IServiceCollection services, IConfiguration configuration, string section)
-        {
-            services.Configure<SqlOption>(x => configuration.GetSection(section).Bind(x));
-            services.AddDbContext<PlainClassesContext>();
-        }
-        
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration, string section)
         {
             services.Configure<JwtOption>(x => configuration.GetSection(section).Bind(x));

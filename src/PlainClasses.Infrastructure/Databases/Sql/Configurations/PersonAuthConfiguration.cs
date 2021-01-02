@@ -10,10 +10,6 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Auth)
-                .WithMany(x => x.PersonAuths)
-                .HasForeignKey(x => x.AuthId);
-
             builder.HasOne(x => x.Person)
                 .WithMany(x => x.PersonAuths)
                 .HasForeignKey(x => x.PersonId);

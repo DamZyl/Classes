@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PlainClasses.Infrastructure.Options;
+using PlainClasses.Application.Configurations.Options;
+using PlainClasses.Domain.Models;
 
-namespace PlainClasses.Infrastructure.Auths
+namespace PlainClasses.Application.Auths
 {
     public class JwtHandler : IJwtHandler
     {
@@ -17,15 +20,20 @@ namespace PlainClasses.Infrastructure.Auths
             _jwtOption = jwtOption;
         }
 
-        public string CreateToken(int userId, string fullName, string role) // Refactor to object!!!
+        public string CreateToken(Guid userId, string fullName, IEnumerable<PersonAuth> auths) // Refactor to object!!!
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, fullName),
-                new Claim(ClaimTypes.Role, role),
+                // new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+            
+            claims.AddRange(auths.Select(
+                auth => new Claim(ClaimTypes.Role, auth.AuthName)
+                )
+            );
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOption.Value.SecretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

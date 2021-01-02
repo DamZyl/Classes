@@ -15,9 +15,11 @@ namespace PlainClasses.Infrastructure.IoC
         
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<AuthModule>();
-            builder.RegisterModule<MediatrModule>();
-            builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule(new AuthModule());
+            builder.RegisterModule(new DataAccessModule(_configuration));
+            builder.RegisterModule(new DomainModule());
+            builder.RegisterModule(new MediatrModule());
+            builder.RegisterModule(new RepositoryModule());
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using PlainClasses.Application.Dispatchers;
+using PlainClasses.Application.Configurations.Dispatchers;
 
 namespace PlainClasses.Application.Platoons.Queries.GetPlatoons
 {

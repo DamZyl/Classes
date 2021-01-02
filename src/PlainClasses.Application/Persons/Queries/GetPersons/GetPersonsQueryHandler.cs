@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PlainClasses.Application.Dispatchers;
+using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Application.Utils;
 using PlainClasses.Domain.Models;
 using PlainClasses.Domain.Repositories;

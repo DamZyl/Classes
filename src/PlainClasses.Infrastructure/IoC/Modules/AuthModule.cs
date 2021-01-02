@@ -1,5 +1,5 @@
 using Autofac;
-using PlainClasses.Infrastructure.Auths;
+using PlainClasses.Application.Auths;
 
 namespace PlainClasses.Infrastructure.IoC.Modules
 {

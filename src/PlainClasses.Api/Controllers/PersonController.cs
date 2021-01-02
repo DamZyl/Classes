@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.Persons.Commands.CreatePerson;
 using PlainClasses.Application.Persons.Queries.GetPersons;
@@ -25,7 +26,7 @@ namespace PlainClasses.Api.Controllers
         public async Task<IActionResult> CreatePerson([FromBody]CreatePersonRequest request) 
         {
             var person = await _mediator.Send(new CreatePersonCommand(request.PersonalNumber, request.MilitaryRankId, 
-                request.PlatoonId, request.FirstName, request.LastName, request.FatherName, request.BirthDate, 
+                request.PlatoonId, request.Password, request.FirstName, request.LastName, request.FatherName, request.BirthDate, 
                 request.WorkPhoneNumber, request.PersonalPhoneNumber, request.Position));
 
             return Created(string.Empty, person);

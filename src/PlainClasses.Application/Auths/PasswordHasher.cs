@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using System.Security.Cryptography;
-using PlainClasses.Infrastructure.Utils;
+using PlainClasses.Application.Auths.Rules;
+using PlainClasses.Application.Utils;
 
-namespace PlainClasses.Infrastructure.Auths
+namespace PlainClasses.Application.Auths
 {
     public class PasswordHasher : IPasswordHasher
     {
@@ -20,10 +21,7 @@ namespace PlainClasses.Infrastructure.Auths
         {
             var parts = hash.Split('.', 3);
 
-            if (parts.Length != 3)
-            {
-                //throw new BusinessException(ErrorCodes.InvalidCredentials, "Invalid credentials.");
-            }
+            ExceptionHelper.CheckRule(new SplitPasswordToPartLengthRule(parts));
 
             var iterations = Convert.ToInt32(parts[0]);
             var salt = Convert.FromBase64String(parts[1]);
