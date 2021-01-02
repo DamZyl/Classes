@@ -2,7 +2,7 @@ using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PlainClasses.Application.Auths.Commands;
+using PlainClasses.Application.Auths.Commands.Login;
 
 namespace PlainClasses.Api.Controllers
 {
@@ -24,7 +24,7 @@ namespace PlainClasses.Api.Controllers
         {
             var token = await _mediator.Send(new LoginCommand(request.PersonalNumber, request.Password));
 
-            return Created(string.Empty, token.Token);
+            return Created(string.Empty, token);
         }
     }
 }

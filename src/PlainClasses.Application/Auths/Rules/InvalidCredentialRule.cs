@@ -1,4 +1,4 @@
-using PlainClasses.Application.Auths.Commands;
+using PlainClasses.Application.Auths.Commands.Login;
 using PlainClasses.Domain.Models.Utils;
 
 namespace PlainClasses.Application.Auths.Rules

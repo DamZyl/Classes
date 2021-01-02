@@ -11,6 +11,14 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             builder.RegisterType<PersonPasswordHasher>()
                 .As<IPersonPasswordHasher>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetMilitaryRankForId>()
+                .As<IGetMilitaryRankForId>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPlatoonForId>()
+                .As<IGetPlatoonForId>()
+                .InstancePerLifetimeScope();
         }
     }
 }

@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.Persons.Commands.CreatePerson;
+using PlainClasses.Application.Persons.Commands.DeletePerson;
+using PlainClasses.Application.Persons.Queries.GetPerson;
 using PlainClasses.Application.Persons.Queries.GetPersons;
 
 namespace PlainClasses.Api.Controllers
@@ -40,6 +42,26 @@ namespace PlainClasses.Api.Controllers
             var persons = await _mediator.Send(new GetPersonsQuery());
 
             return Ok(persons);
+        }
+        
+        [Route("{id}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(PersonViewModelDetail), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetPerson(Guid id)
+        {
+            var person = await _mediator.Send(new GetPersonQuery { Id = id});
+
+            return Ok(person);
+        }
+        
+        [Route("{id}")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> DeletePerson(Guid id)
+        {
+            await _mediator.Send(new DeletePersonCommand { PersonId = id});
+
+            return NoContent();
         }
     }
 }

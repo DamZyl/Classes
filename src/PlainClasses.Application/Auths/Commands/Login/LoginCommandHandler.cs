@@ -6,7 +6,7 @@ using PlainClasses.Application.Configurations.Data;
 using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Application.Utils;
 
-namespace PlainClasses.Application.Auths.Commands
+namespace PlainClasses.Application.Auths.Commands.Login
 {
     public class LoginCommandHandler : ICommandHandler<LoginCommand, ReturnLoginViewModel>
     {
@@ -37,12 +37,14 @@ namespace PlainClasses.Application.Auths.Commands
             
             var person = await connection.QuerySingleOrDefaultAsync<PersonDto>(sql, new { request.PersonalNumber });
             
+            ExceptionHelper.CheckRule(new PersonDoesNotExistRule(person));
+            
             const string sqlAuths = "SELECT " +
-                               "[AuthPerson].[Id], " +
-                               "[AuthPerson].[PersonId], " +
-                               "[AuthPerson].[AuthName] " +
-                               "FROM PersonAuths AS [AuthPerson] " +
-                               "WHERE [AuthPerson].[PersonId] = @Id ";
+                                    "[AuthPerson].[Id], " +
+                                    "[AuthPerson].[PersonId], " +
+                                    "[AuthPerson].[AuthName] " +
+                                    "FROM PersonAuths AS [AuthPerson] " +
+                                    "WHERE [AuthPerson].[PersonId] = @Id ";
             
             var auths = await connection.QueryAsync<AuthDto>(sqlAuths, new { person.Id });
 

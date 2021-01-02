@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using PlainClasses.Application.Auths.Commands;
+using PlainClasses.Application.Auths.Commands.Login;
 
 namespace PlainClasses.Application.Auths
 {

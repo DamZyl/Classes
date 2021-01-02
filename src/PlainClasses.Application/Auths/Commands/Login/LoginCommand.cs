@@ -1,6 +1,6 @@
 using PlainClasses.Application.Configurations.Dispatchers;
 
-namespace PlainClasses.Application.Auths.Commands
+namespace PlainClasses.Application.Auths.Commands.Login
 {
     public class LoginCommand : CommandBase<ReturnLoginViewModel>
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PlainClasses.Application.Auths.Commands
+namespace PlainClasses.Application.Auths.Commands.Login
 {
     public class PersonDto
     {

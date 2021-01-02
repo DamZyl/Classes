@@ -39,16 +39,15 @@ namespace PlainClasses.Domain.Models
 
         private Person() { }
         
-        private Person(Guid militaryRankId, string militaryRankAcronym, Guid platoonId, string platoonAcronym, string personalNumber, 
-            string password, string firstName, string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, 
-            string personalPhoneNumber, string position)
+        private Person(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string password, string firstName, 
+            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
         {
             Id = Guid.NewGuid();
             PersonalNumber = personalNumber;
-            MilitaryRankId = militaryRankId;
-            PlatoonId = platoonId;
-            MilitaryRankAcr = militaryRankAcronym;
-            PlatoonAcr = platoonAcronym;
+            MilitaryRankId = militaryRank.Id;
+            PlatoonId = platoon.Id;
+            MilitaryRankAcr = militaryRank.Acronym;
+            PlatoonAcr = platoon.Acronym;
             Password = password;
             FirstName = firstName.ToUppercaseFirstInvariant();
             LastName = lastName.ToUppercaseFirstInvariant();
@@ -61,24 +60,19 @@ namespace PlainClasses.Domain.Models
             AddDomainEvent(new PersonCreatedEvent(Id));
         }
 
-        public static Person CreatePerson(Guid militaryRankId, string militaryRankAcronym, Guid platoonId, string platoonAcronym, 
-            string personalNumber, string password, string firstName, string lastName, string fatherName, DateTime birthDate, 
-            string workPhoneNumber, string personalPhoneNumber, string position, IPersonPasswordHasher passwordHasher)
+        public static Person CreatePerson(Guid militaryRankId, Guid platoonId, string personalNumber, string password, 
+            string firstName, string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, 
+            string personalPhoneNumber, string position, IPersonPasswordHasher passwordHasher, 
+            IGetMilitaryRankForId getMilitaryRankForId, IGetPlatoonForId getPlatoonForId)
         {
-            // CheckRule(new PersonalNumberValidRule(personalNumber));   
-            // CheckRule(new EmptyFieldRule(firstName));
-            // CheckRule(new EmptyFieldRule(lastName));
-            // CheckRule(new EmptyFieldRule(fatherName));
-            // CheckRule(new OverEighteenRule(birthDate));
-            // CheckRule(new EmptyFieldRule(workPhoneNumber));
-            // CheckRule(new NumberFormatRule(workPhoneNumber));
-            // CheckRule(new EmptyFieldRule(personalPhoneNumber));
-            // CheckRule(new NumberFormatRule(personalPhoneNumber));
-            // CheckRule(new PersonPositionRule(position));
+            var militaryRank = getMilitaryRankForId.Get(militaryRankId);
+            CheckRule(new MilitaryRankExistRule(militaryRank));
+
+            var platoon = getPlatoonForId.Get(platoonId);
+            CheckRule(new PlatoonExistRule(platoon));
             
-            return new Person(militaryRankId, militaryRankAcronym, platoonId, platoonAcronym, personalNumber, 
-                passwordHasher.Hash(password), firstName, lastName, fatherName, birthDate, workPhoneNumber, 
-                personalPhoneNumber, position);
+            return new Person(militaryRank, platoon, personalNumber, passwordHasher.Hash(password), firstName, lastName, 
+                fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
         }
 
         public void AddAuthToPerson(string authName) // Domain Service???

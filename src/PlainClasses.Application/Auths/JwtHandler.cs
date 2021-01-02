@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PlainClasses.Application.Auths.Commands;
+using PlainClasses.Application.Auths.Commands.Login;
 using PlainClasses.Application.Configurations.Options;
 
 namespace PlainClasses.Application.Auths
@@ -20,7 +20,7 @@ namespace PlainClasses.Application.Auths
             _jwtOption = jwtOption;
         }
 
-        public string CreateToken(Guid userId, string fullName, IEnumerable<AuthDto> auths) // Refactor to object!!!
+        public string CreateToken(Guid userId, string fullName, IEnumerable<AuthDto> auths)
         {
             var claims = new List<Claim>
             {
