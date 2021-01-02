@@ -1,4 +1,4 @@
-using PlainClasses.Domain.Models;
+using PlainClasses.Application.Auths.Commands;
 using PlainClasses.Domain.Models.Utils;
 
 namespace PlainClasses.Application.Auths.Rules
@@ -6,10 +6,10 @@ namespace PlainClasses.Application.Auths.Rules
     public class InvalidCredentialRule : IBusinessRule
     {
         private readonly IPasswordHasher _passwordHasher;
-        private readonly Person _person;
+        private readonly PersonDto _person;
         private readonly string _requestPassword;
 
-        public InvalidCredentialRule(IPasswordHasher passwordHasher, Person person, string requestPassword)
+        public InvalidCredentialRule(IPasswordHasher passwordHasher, PersonDto person, string requestPassword)
         {
             _passwordHasher = passwordHasher;
             _person = person;

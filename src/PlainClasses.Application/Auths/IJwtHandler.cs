@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using PlainClasses.Domain.Models;
+using PlainClasses.Application.Auths.Commands;
 
 namespace PlainClasses.Application.Auths
 {
     public interface IJwtHandler
     {
-        string CreateToken(Guid userId, string fullName, IEnumerable<PersonAuth> auths);
+        string CreateToken(Guid userId, string fullName, IEnumerable<AuthDto> auths);
     }
 }

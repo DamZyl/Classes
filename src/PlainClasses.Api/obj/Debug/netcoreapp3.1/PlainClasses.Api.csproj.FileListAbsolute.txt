@@ -107,3 +107,4 @@ C:/Users/damia/Documents/Codes/DotNet/PlainClasses/src/PlainClasses.Api/obj/Debu
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/CommonServiceLocator.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/FluentValidation.dll
 /home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Hellang.Middleware.ProblemDetails.dll
+/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Api/bin/Debug/netcoreapp3.1/Dapper.dll

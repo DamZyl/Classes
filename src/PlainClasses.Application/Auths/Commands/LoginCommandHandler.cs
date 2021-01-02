@@ -1,34 +1,52 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using Dapper;
 using PlainClasses.Application.Auths.Rules;
+using PlainClasses.Application.Configurations.Data;
 using PlainClasses.Application.Configurations.Dispatchers;
-using PlainClasses.Application.Extensions;
 using PlainClasses.Application.Utils;
-using PlainClasses.Domain.Models;
-using PlainClasses.Domain.Repositories;
 
 namespace PlainClasses.Application.Auths.Commands
 {
     public class LoginCommandHandler : ICommandHandler<LoginCommand, ReturnLoginViewModel>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ISqlConnectionFactory _sqlConnectionFactory;
         private readonly IJwtHandler _jwtHandler;
         private readonly IPasswordHasher _passwordHasher;
 
-        public LoginCommandHandler(IUnitOfWork unitOfWork, IJwtHandler jwtHandler, IPasswordHasher passwordHasher)
+        public LoginCommandHandler(ISqlConnectionFactory sqlConnectionFactory, IJwtHandler jwtHandler, IPasswordHasher passwordHasher)
         {
-            _unitOfWork = unitOfWork;
+            _sqlConnectionFactory = sqlConnectionFactory;
             _jwtHandler = jwtHandler;
             _passwordHasher = passwordHasher;
         }
         
         public async Task<ReturnLoginViewModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var person = await _unitOfWork.Repository<Person>()
-                .GetOrFailWithIncludesAsync(x => x.PersonalNumber == request.PersonalNumber, 
-                    includes: i => i.Include(x => x.PersonAuths));
+            var connection = _sqlConnectionFactory.GetOpenConnection();
+            
+            const string sql = "SELECT " +
+                               "[Person].[Id], " +
+                               "[Person].[FirstName], " +
+                               "[Person].[LastName], " +
+                               "[Person].[PersonalNumber], " +
+                               "[Person].[Password], " +
+                               "[Person].[MilitaryRankAcr] " +
+                               "FROM Persons AS [Person] " +
+                               "WHERE [Person].[PersonalNumber] = @PersonalNumber ";
+            
+            var person = await connection.QuerySingleOrDefaultAsync<PersonDto>(sql, new { request.PersonalNumber });
+            
+            const string sqlAuths = "SELECT " +
+                               "[AuthPerson].[Id], " +
+                               "[AuthPerson].[PersonId], " +
+                               "[AuthPerson].[AuthName] " +
+                               "FROM PersonAuths AS [AuthPerson] " +
+                               "WHERE [AuthPerson].[PersonId] = @Id ";
+            
+            var auths = await connection.QueryAsync<AuthDto>(sqlAuths, new { person.Id });
+
+            person.PersonAuths = auths.AsList();
 
             ExceptionHelper.CheckRule(new InvalidCredentialRule(_passwordHasher, person, request.Password));
             
