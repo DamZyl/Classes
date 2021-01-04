@@ -19,7 +19,7 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
 
         public CreatePersonCommand(string personalNumber, Guid militaryRankId, Guid platoonId, string password, string firstName, 
             string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, 
-            string position) // Refactor To One Object!!!
+            string position)
         {
             PersonalNumber = personalNumber;
             MilitaryRankId = militaryRankId;

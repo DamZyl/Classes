@@ -35,8 +35,6 @@ namespace PlainClasses.Infrastructure.IoC.Modules
                     var dbContextOptionsBuilder = new DbContextOptionsBuilder<PlainClassesContext>();
                     dbContextOptionsBuilder.UseSqlServer(dbConfig.ConnectionString, options => 
                         options.MigrationsAssembly("PlainClasses.Api"));
-                    // dbContextOptionsBuilder
-                    //     .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
 
                     return new PlainClassesContext(dbContextOptionsBuilder.Options);
                 })

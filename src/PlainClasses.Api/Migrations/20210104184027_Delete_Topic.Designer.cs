@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlainClasses.Infrastructure.Databases.Sql;
 
 namespace PlainClasses.Api.Migrations
 {
     [DbContext(typeof(PlainClassesContext))]
-    partial class PlainClassesContextModelSnapshot : ModelSnapshot
+    [Migration("20210104184027_Delete_Topic")]
+    partial class Delete_Topic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

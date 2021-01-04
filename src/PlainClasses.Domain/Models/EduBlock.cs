@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.Extensions;
 using PlainClasses.Domain.Models.Enums;
 using PlainClasses.Domain.Models.Events;
@@ -29,7 +30,8 @@ namespace PlainClasses.Domain.Models
 
         private EduBlock() { }
 
-        private EduBlock(EduBlockSubject eduBlockSubject, DateTime startEduBlock, DateTime endEduBlock, string remarks, string place)
+        private EduBlock(EduBlockSubject eduBlockSubject, DateTime startEduBlock, DateTime endEduBlock, 
+            string remarks, string place, IEnumerable<Platoon> platoons)
         {
             Id = Guid.NewGuid();
             EduBlockSubjectId = eduBlockSubject.Id;
@@ -38,15 +40,25 @@ namespace PlainClasses.Domain.Models
             EndEduBlock = endEduBlock;
             Remarks = remarks;
             Place = Enum.Parse<Place>(place.ToUppercaseFirstInvariant());
+
+            foreach (var platoon in platoons)
+            {
+                AddPlatoonToEduBlock(platoon.Id);
+            }
             
             AddDomainEvent(new EduBlockCreatedEvent(Id));
         }
 
-        public static EduBlock CreateEduBlock(EduBlockSubject eduBlockSubject, DateTime startEduBlock, DateTime endEduBlock, string remarks, string place)
+        public static EduBlock CreateEduBlock(Guid eduBlockSubjectId, DateTime startEduBlock, DateTime endEduBlock, 
+            string remarks, string place, IEnumerable<Guid> platoonIds, IGetEduBlockSubjectForId getEduBlockSubjectForId,
+            IGetPlatoonsForIds getPlatoonsForIds)
         {
             // check rule!!!
 
-            return new EduBlock(eduBlockSubject, startEduBlock, endEduBlock, remarks, place);
+            var eduBlockSubject = getEduBlockSubjectForId.Get(eduBlockSubjectId);
+            var platoons = getPlatoonsForIds.Get(platoonIds);
+                
+            return new EduBlock(eduBlockSubject, startEduBlock, endEduBlock, remarks, place, platoons);
         }
 
         public void AddPlatoonToEduBlock(Guid platoonId)

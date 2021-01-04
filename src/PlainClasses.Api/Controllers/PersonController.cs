@@ -23,18 +23,6 @@ namespace PlainClasses.Api.Controllers
         }
         
         [Route("")]
-        [HttpPost]
-        [ProducesResponseType(typeof(ReturnPersonViewModel), (int)HttpStatusCode.Created)]
-        public async Task<IActionResult> CreatePerson([FromBody]CreatePersonRequest request) 
-        {
-            var person = await _mediator.Send(new CreatePersonCommand(request.PersonalNumber, request.MilitaryRankId, 
-                request.PlatoonId, request.Password, request.FirstName, request.LastName, request.FatherName, request.BirthDate, 
-                request.WorkPhoneNumber, request.PersonalPhoneNumber, request.Position));
-
-            return Created(string.Empty, person);
-        }      
-        
-        [Route("")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<PersonViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPersons()
@@ -53,6 +41,19 @@ namespace PlainClasses.Api.Controllers
 
             return Ok(person);
         }
+        
+        [Route("")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnPersonViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> CreatePerson([FromBody]CreatePersonRequest request) 
+        {
+            var person = await _mediator.Send(new CreatePersonCommand(request.PersonalNumber, request.MilitaryRankId, 
+                request.PlatoonId, request.Password, request.FirstName, request.LastName, request.FatherName, request.BirthDate, 
+                request.WorkPhoneNumber, request.PersonalPhoneNumber, request.Position));
+
+            return Created(string.Empty, person);
+        }      
+
         
         [Route("{id}")]
         [HttpDelete]

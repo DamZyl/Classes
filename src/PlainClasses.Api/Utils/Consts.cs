@@ -9,6 +9,7 @@ namespace PlainClasses.Api.Utils
         public const string SwaggerBearer = "Bearer";
         public const string SwaggerAuthDescription = "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')";
         public const string SwaggerAuth = "Authorization";
+        public const string DbConfigurationSection = "Sql";
         public const string JwtConfigurationSection = "Jwt";
     }
 }

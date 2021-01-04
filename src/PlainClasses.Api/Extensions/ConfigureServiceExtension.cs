@@ -13,6 +13,9 @@ namespace PlainClasses.Api.Extensions
 {
     public static class ConfigureServiceExtension
     {
+        // public static void AddSqlConfiguration(this IServiceCollection services, IConfiguration configuration, string section)
+        //     => services.Configure<SqlOption>(x => configuration.GetSection(section).Bind(x));
+        
         public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration, string section)
         {
             services.Configure<JwtOption>(x => configuration.GetSection(section).Bind(x));

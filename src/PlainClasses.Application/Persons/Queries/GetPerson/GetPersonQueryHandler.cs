@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
 using PlainClasses.Application.Configurations.Dispatchers;
+using PlainClasses.Application.Persons.Rules;
+using PlainClasses.Application.Utils;
 
 namespace PlainClasses.Application.Persons.Queries.GetPerson
 {
@@ -33,6 +35,8 @@ namespace PlainClasses.Application.Persons.Queries.GetPerson
                                "WHERE [Person].[Id] = @Id ";
             
             var person = await connection.QuerySingleOrDefaultAsync<PersonViewModelDetail>(sql, new { request.Id });
+            
+            ExceptionHelper.CheckRule(new PersonExistRule(person));
             
             const string sqlAuths = "SELECT " +
                                     "[AuthPerson].[Id], " +
