@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlainClasses.Infrastructure.Databases.Sql;
 
 namespace PlainClasses.Api.Migrations
 {
     [DbContext(typeof(PlainClassesContext))]
-    partial class PlainClassesContextModelSnapshot : ModelSnapshot
+    [Migration("20210105110021_Add_Nullable_Platoon_In_Person")]
+    partial class Add_Nullable_Platoon_In_Person
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

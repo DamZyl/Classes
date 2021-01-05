@@ -28,6 +28,10 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             builder.RegisterType<GetPlatoonsForIds>()
                 .As<IGetPlatoonsForIds>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPersonForId>()
+                .As<IGetPersonForId>()
+                .InstancePerLifetimeScope();
         }
     }
 }

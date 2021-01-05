@@ -7,7 +7,7 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
     {
         public string PersonalNumber { get; }
         public Guid MilitaryRankId { get; }
-        public Guid PlatoonId { get; }
+        public Guid? PlatoonId { get; }
         public string Password { get; }
         public string FirstName { get; }
         public string LastName { get; }
@@ -17,7 +17,7 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
         public string PersonalPhoneNumber { get; }
         public string Position { get; }
 
-        public CreatePersonCommand(string personalNumber, Guid militaryRankId, Guid platoonId, string password, string firstName, 
+        public CreatePersonCommand(string personalNumber, Guid militaryRankId, Guid? platoonId, string password, string firstName, 
             string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, 
             string position)
         {

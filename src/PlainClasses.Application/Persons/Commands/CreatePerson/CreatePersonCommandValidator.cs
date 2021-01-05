@@ -19,9 +19,9 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
                 .NotEmpty()
                 .WithMessage("MilitaryRankId is empty.");
             
-            RuleFor(x => x.PlatoonId)
-                .NotEmpty()
-                .WithMessage("PlatoonId is empty.");
+            // RuleFor(x => x.PlatoonId)
+            //     .NotEmpty()
+            //     .WithMessage("PlatoonId is empty.");
             
             RuleFor(x => x.FirstName)
                 .NotEmpty()

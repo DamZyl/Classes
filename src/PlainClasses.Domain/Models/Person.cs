@@ -59,8 +59,27 @@ namespace PlainClasses.Domain.Models
             
             AddDomainEvent(new PersonCreatedEvent(Id));
         }
+        
+        private Person(MilitaryRank militaryRank, string personalNumber, string password, string firstName, 
+            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
+        {
+            Id = Guid.NewGuid();
+            PersonalNumber = personalNumber;
+            MilitaryRankId = militaryRank.Id;
+            MilitaryRankAcr = militaryRank.Acronym;
+            Password = password;
+            FirstName = firstName.ToUppercaseFirstInvariant();
+            LastName = lastName.ToUppercaseFirstInvariant();
+            FatherName = fatherName.ToUppercaseFirstInvariant();
+            BirthDate = birthDate;
+            WorkPhoneNumber = workPhoneNumber;
+            PersonalPhoneNumber = personalPhoneNumber;
+            Position = Enum.Parse<PersonPosition>(position.ToUppercaseFirstInvariant());
+            
+            AddDomainEvent(new PersonCreatedEvent(Id));
+        }
 
-        public static Person CreatePerson(Guid militaryRankId, Guid platoonId, string personalNumber, string password, 
+        public static Person CreatePerson(Guid militaryRankId, Guid? platoonId, string personalNumber, string password, 
             string firstName, string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, 
             string personalPhoneNumber, string position, IPersonPasswordHasher passwordHasher, 
             IGetMilitaryRankForId getMilitaryRankForId, IGetPlatoonForId getPlatoonForId)
@@ -68,13 +87,17 @@ namespace PlainClasses.Domain.Models
             var militaryRank = getMilitaryRankForId.Get(militaryRankId);
             CheckRule(new MilitaryRankExistRule(militaryRank));
 
-            var platoon = getPlatoonForId.Get(platoonId);
-            CheckRule(new PlatoonExistRule(platoon));
+            if (platoonId == null)
+                return new Person(militaryRank, personalNumber, passwordHasher.Hash(password), firstName, lastName,
+                    fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
             
+            var platoon = getPlatoonForId.Get((Guid)platoonId);
+            CheckRule(new PlatoonExistRule(platoon));
+                
             return new Person(militaryRank, platoon, personalNumber, passwordHasher.Hash(password), firstName, lastName, 
                 fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
         }
-
+        
         public void AddAuthToPerson(string authName) // Domain Service???
         {
             CheckRule(new PersonAuthRule(PersonAuths, authName));

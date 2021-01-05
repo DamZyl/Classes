@@ -36,10 +36,9 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
             builder.Property(x => x.MilitaryRankAcr)
                 .HasMaxLength(15)
                 .IsRequired();
-            
+
             builder.Property(x => x.PlatoonAcr)
-                .HasMaxLength(5)
-                .IsRequired();
+                .HasMaxLength(5);
 
             builder.HasOne(x => x.MilitaryRank)
                 .WithMany(x => x.Persons)

@@ -4,6 +4,7 @@ using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.Extensions;
 using PlainClasses.Domain.Models.Enums;
 using PlainClasses.Domain.Models.Events;
+using PlainClasses.Domain.Models.Rules;
 using PlainClasses.Domain.Models.Utils;
 
 namespace PlainClasses.Domain.Models
@@ -43,7 +44,7 @@ namespace PlainClasses.Domain.Models
 
             foreach (var platoon in platoons)
             {
-                AddPlatoonToEduBlock(platoon.Id);
+                AddPlatoonToEduBlock(platoon);
             }
             
             AddDomainEvent(new EduBlockCreatedEvent(Id));
@@ -53,22 +54,32 @@ namespace PlainClasses.Domain.Models
             string remarks, string place, IEnumerable<Guid> platoonIds, IGetEduBlockSubjectForId getEduBlockSubjectForId,
             IGetPlatoonsForIds getPlatoonsForIds)
         {
-            // check rule!!!
-
             var eduBlockSubject = getEduBlockSubjectForId.Get(eduBlockSubjectId);
+            CheckRule(new EduBlockSubjectExistRule(eduBlockSubject));
+            
             var platoons = getPlatoonsForIds.Get(platoonIds);
+            CheckRule(new PlatoonsIdsCountEqualPlatoonsCount(platoonIds, platoons));
                 
             return new EduBlock(eduBlockSubject, startEduBlock, endEduBlock, remarks, place, platoons);
         }
 
-        public void AddPlatoonToEduBlock(Guid platoonId)
+        public void AddPlatoonToEduBlock(Guid platoonId, IGetPlatoonForId getPlatoonForId)
         {
-            // check rule!!!
+            var platoon = getPlatoonForId.Get(platoonId);
+            CheckRule(new PlatoonExistRule(platoon));
 
-            _platoons.Add(PlatoonInEduBlock.AddPlatoonToEduBlock(Id, platoonId));
+            _platoons.Add(PlatoonInEduBlock.AddPlatoonToEduBlock(Id, platoon.Id));
             
-            AddDomainEvent(new PlatoonToEduBlockAddedEvent(Id, platoonId));
+            AddDomainEvent(new PlatoonToEduBlockAddedEvent(Id, platoon.Id));
         }
+        
+        private void AddPlatoonToEduBlock(Platoon platoon)
+        {
+            _platoons.Add(PlatoonInEduBlock.AddPlatoonToEduBlock(Id, platoon.Id));
+            
+            AddDomainEvent(new PlatoonToEduBlockAddedEvent(Id, platoon.Id));
+        }
+        
         
         public void AddFunctionForPerson(Guid personId, string function) // Domain Service???
         {
