@@ -1,5 +1,5 @@
 using PlainClasses.Application.Persons.Queries.GetPerson;
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Application.Persons.Rules
 {

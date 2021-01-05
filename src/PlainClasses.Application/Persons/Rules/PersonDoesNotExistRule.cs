@@ -1,5 +1,5 @@
-using PlainClasses.Domain.Models;
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Persons;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Application.Persons.Rules
 {

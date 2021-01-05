@@ -5,7 +5,7 @@ using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Application.Persons.Rules;
 using PlainClasses.Application.Utils;
 using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Persons;
 using PlainClasses.Domain.Repositories;
 
 namespace PlainClasses.Application.Persons.Commands.DeletePerson

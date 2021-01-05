@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
 using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.EduBlocks;
 
 namespace PlainClasses.Application.EduBlocks.DomainServices
 {

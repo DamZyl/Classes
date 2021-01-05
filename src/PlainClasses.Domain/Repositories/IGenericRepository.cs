@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Domain.Repositories
 {

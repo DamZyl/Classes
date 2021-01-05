@@ -7,12 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PlainClasses.Api.Extensions;
+using PlainClasses.Api.Configurations.Extensions;
 using PlainClasses.Api.Utils;
 using PlainClasses.Api.Validations;
 using PlainClasses.Application.Configurations.Validation;
-using PlainClasses.Domain.Models.Utils;
-using PlainClasses.Infrastructure.Databases.Sql;
+using PlainClasses.Domain.Utils.SharedKernels;
 using PlainClasses.Infrastructure.IoC;
 
 namespace PlainClasses.Api

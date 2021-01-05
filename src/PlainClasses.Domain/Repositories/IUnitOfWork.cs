@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Domain.Repositories
 {

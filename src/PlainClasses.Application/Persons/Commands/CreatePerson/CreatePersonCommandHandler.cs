@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Persons;
 using PlainClasses.Domain.Repositories;
 
 namespace PlainClasses.Application.Persons.Commands.CreatePerson

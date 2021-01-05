@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Platoons;
 
 namespace PlainClasses.Domain.DomainServices
 {

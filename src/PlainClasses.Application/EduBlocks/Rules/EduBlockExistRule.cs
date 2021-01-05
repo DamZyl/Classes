@@ -1,5 +1,5 @@
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlock;
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Application.EduBlocks.Rules
 {

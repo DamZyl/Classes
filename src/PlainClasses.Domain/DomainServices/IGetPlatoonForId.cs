@@ -1,5 +1,5 @@
 using System;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Platoons;
 
 namespace PlainClasses.Domain.DomainServices
 {

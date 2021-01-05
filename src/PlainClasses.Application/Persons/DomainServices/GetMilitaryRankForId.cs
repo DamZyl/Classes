@@ -2,7 +2,7 @@ using System;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
 using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Persons;
 
 namespace PlainClasses.Application.Persons.DomainServices
 {

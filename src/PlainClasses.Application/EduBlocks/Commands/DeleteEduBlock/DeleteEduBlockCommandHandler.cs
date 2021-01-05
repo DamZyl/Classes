@@ -5,7 +5,7 @@ using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Application.EduBlocks.Rules;
 using PlainClasses.Application.Utils;
 using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.EduBlocks;
 using PlainClasses.Domain.Repositories;
 
 namespace PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock

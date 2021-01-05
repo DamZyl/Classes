@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.EduBlocks;
 
 namespace PlainClasses.Domain.DomainServices
 {

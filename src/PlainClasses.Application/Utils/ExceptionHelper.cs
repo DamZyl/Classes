@@ -1,4 +1,4 @@
-using PlainClasses.Domain.Models.Utils;
+using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Application.Utils
 {
