@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1RklmL7TWUZUX2FLn+HBtfuNR6DMF7mHWIXBZ33JS62GEj4SxvqVaW7X0lYBL5mIvZuyb5U8wWb3JEmqoL1PYw==",
+  "dgSpecHash": "AcmxisPMfq8tvfkRbUCMR/QFp3Bv/tsVQqVlSZkMv6MneKtYXOqz48W81e/tvdt3QhqAUr0cOaeuhqzYaNnL6g==",
   "success": true,
   "projectFilePath": "/home/damian/Documents/Projects/Csharp/PlainClasses/src/PlainClasses.Domain/PlainClasses.Domain.csproj",
   "expectedPackageFiles": [
+    "/home/damian/.nuget/packages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.bcl.hashcode/1.1.0/microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "/home/damian/.nuget/packages/microsoft.entityframeworkcore/3.1.9/microsoft.entityframeworkcore.3.1.9.nupkg.sha512",

@@ -1,9 +1,8 @@
 namespace PlainClasses.Infrastructure.Utils
 {
-    public class Consts
+    public static class Consts
     {
-        public const int SaltSize = 16;   
-        public const int KeySize = 32;   
-        public const int Iterations = 10000; 
+        public const string ApplicationAssemblyPath = "bin/Debug/netcoreapp3.1/PlainClasses.Application.dll";
+        public const string DbConfigurationSection = "Sql";
     }
 }

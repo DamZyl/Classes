@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PlainClasses.Application.Dispatchers;
+using Dapper;
+using PlainClasses.Application.Configurations.Data;
+using PlainClasses.Application.Configurations.Dispatchers;
 using PlainClasses.Application.Utils;
 using PlainClasses.Domain.Models;
 using PlainClasses.Domain.Repositories;
@@ -11,18 +13,32 @@ namespace PlainClasses.Application.Persons.Queries.GetPersons
 {
     public class GetPersonsQueryHandler : IQueryHandler<GetPersonsQuery, IEnumerable<PersonViewModel>>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ISqlConnectionFactory _sqlConnectionFactory;
 
-        public GetPersonsQueryHandler(IUnitOfWork unitOfWork)
+        public GetPersonsQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
         {
-            _unitOfWork = unitOfWork;
+            _sqlConnectionFactory = sqlConnectionFactory;
         }
         
         public async Task<IEnumerable<PersonViewModel>> Handle(GetPersonsQuery request, CancellationToken cancellationToken)
         {
-            var persons = await _unitOfWork.Repository<Person>().GetAllAsync();
+            var connection = _sqlConnectionFactory.GetOpenConnection();
+            
+            const string sql = "SELECT " +
+                               "[Person].[Id], " +
+                               "[Person].[PersonalNumber], " +
+                               "[Person].[MilitaryRankAcr] + ' ' + [Person].[FirstName] + ' ' + [Person].[LastName] AS [FullName], " +
+                               "[Person].[FatherName], " +
+                               "[Person].[BirthDate], " +
+                               "[Person].[PlatoonAcr], " +
+                               "[Person].[WorkPhoneNumber], " +
+                               "[Person].[PersonalPhoneNumber], " +
+                               "[Person].[Position] " +
+                               "FROM Persons AS [Person] ";
+            
+            var persons = await connection.QueryAsync<PersonViewModel>(sql);
 
-            return persons.Select(Mapper.MapPersonToPersonViewModel);
+            return persons;
         }
     }
 }

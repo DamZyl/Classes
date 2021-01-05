@@ -11,7 +11,7 @@ using PlainClasses.Infrastructure.Databases.Sql;
 
 namespace PlainClasses.Infrastructure.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Entity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IAggregateRoot
     {
         private readonly PlainClassesContext _context;
 

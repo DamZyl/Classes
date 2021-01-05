@@ -1,6 +1,7 @@
 using System;
-using System.Reflection;
-using MediatR;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PlainClasses.Api.Extensions;
 using PlainClasses.Api.Utils;
+using PlainClasses.Api.Validations;
+using PlainClasses.Application.Configurations.Validation;
+using PlainClasses.Domain.Models.Utils;
 using PlainClasses.Infrastructure.Databases.Sql;
+using PlainClasses.Infrastructure.IoC;
 
 namespace PlainClasses.Api
 {
@@ -21,22 +26,27 @@ namespace PlainClasses.Api
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddSqlConfiguration(Configuration, Consts.DbConfigurationSection);
-            services.AddDbContext<PlainClassesContext>();
+            // services.AddSqlConfiguration(Configuration, Consts.DbConfigurationSection);
+            // services.AddDbContext<PlainClassesContext>();
             
             services.AddJwtConfiguration(Configuration, Consts.JwtConfigurationSection);
-            
-            services.AddMediatR(Assembly.LoadFrom(Consts.ApplicationAssemblyPath));
-            services.AddRepository();
-            services.AddUnitOfWork();
-            services.AddPasswordHasher();
-            services.AddJwt();
-            
             services.AddControllers();
-            
             services.AddSwagger();
+            services.AddProblemDetails(x =>
+            {
+                x.Map<InvalidCommandException>(ex => new InvalidCommandProblemDetails(ex));
+                x.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+            });
+            
+            var builder = new ContainerBuilder();
+            
+            builder.Populate(services);
+            builder.RegisterModule(new InfrastructureModule(Configuration));
+            
+            var container = builder.Build();
+            return new AutofacServiceProvider(container); 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,11 +55,16 @@ namespace PlainClasses.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseProblemDetails();
+            }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

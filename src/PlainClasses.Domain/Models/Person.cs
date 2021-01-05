@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.Extensions;
 using PlainClasses.Domain.Models.Enums;
 using PlainClasses.Domain.Models.Events;
@@ -13,9 +14,10 @@ namespace PlainClasses.Domain.Models
         public Guid Id { get; private set; }
         public string PersonalNumber { get; private set; }
         public Guid MilitaryRankId { get; private set; }
-        public Guid PlatoonId { get; private set; }
+        public Guid? PlatoonId { get; private set; }
         public string MilitaryRankAcr { get; private set; }
         public string PlatoonAcr { get; private set; }
+        public string Password { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string FatherName { get; private set; }
@@ -37,8 +39,8 @@ namespace PlainClasses.Domain.Models
 
         private Person() { }
         
-        private Person(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string firstName, string lastName, 
-            string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
+        private Person(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string password, string firstName, 
+            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
         {
             Id = Guid.NewGuid();
             PersonalNumber = personalNumber;
@@ -46,6 +48,26 @@ namespace PlainClasses.Domain.Models
             PlatoonId = platoon.Id;
             MilitaryRankAcr = militaryRank.Acronym;
             PlatoonAcr = platoon.Acronym;
+            Password = password;
+            FirstName = firstName.ToUppercaseFirstInvariant();
+            LastName = lastName.ToUppercaseFirstInvariant();
+            FatherName = fatherName.ToUppercaseFirstInvariant();
+            BirthDate = birthDate;
+            WorkPhoneNumber = workPhoneNumber;
+            PersonalPhoneNumber = personalPhoneNumber;
+            Position = Enum.Parse<PersonPosition>(position.ToUppercaseFirstInvariant());
+            
+            AddDomainEvent(new PersonCreatedEvent(Id));
+        }
+        
+        private Person(MilitaryRank militaryRank, string personalNumber, string password, string firstName, 
+            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
+        {
+            Id = Guid.NewGuid();
+            PersonalNumber = personalNumber;
+            MilitaryRankId = militaryRank.Id;
+            MilitaryRankAcr = militaryRank.Acronym;
+            Password = password;
             FirstName = firstName.ToUppercaseFirstInvariant();
             LastName = lastName.ToUppercaseFirstInvariant();
             FatherName = fatherName.ToUppercaseFirstInvariant();
@@ -57,41 +79,32 @@ namespace PlainClasses.Domain.Models
             AddDomainEvent(new PersonCreatedEvent(Id));
         }
 
-        public static Person CreatePerson(MilitaryRank militaryRank, Platoon platoon, string personalNumber, string firstName, 
-            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
+        public static Person CreatePerson(Guid militaryRankId, Guid? platoonId, string personalNumber, string password, 
+            string firstName, string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, 
+            string personalPhoneNumber, string position, IPersonPasswordHasher passwordHasher, 
+            IGetMilitaryRankForId getMilitaryRankForId, IGetPlatoonForId getPlatoonForId)
         {
-            // CheckRule(new PersonalNumberValidRule(personalNumber));   
-            // CheckRule(new EmptyFieldRule(firstName));
-            // CheckRule(new EmptyFieldRule(lastName));
-            // CheckRule(new EmptyFieldRule(fatherName));
-            // CheckRule(new OverEighteenRule(birthDate));
-            // CheckRule(new EmptyFieldRule(workPhoneNumber));
-            // CheckRule(new NumberFormatRule(workPhoneNumber));
-            // CheckRule(new EmptyFieldRule(personalPhoneNumber));
-            // CheckRule(new NumberFormatRule(personalPhoneNumber));
-            // CheckRule(new PersonPositionRule(position));
+            var militaryRank = getMilitaryRankForId.Get(militaryRankId);
+            CheckRule(new MilitaryRankExistRule(militaryRank));
+
+            if (platoonId == null)
+                return new Person(militaryRank, personalNumber, passwordHasher.Hash(password), firstName, lastName,
+                    fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
             
-            return new Person(militaryRank, platoon, personalNumber, firstName, lastName, fatherName, birthDate, 
-                workPhoneNumber, personalPhoneNumber, position);
+            var platoon = getPlatoonForId.Get((Guid)platoonId);
+            CheckRule(new PlatoonExistRule(platoon));
+                
+            return new Person(militaryRank, platoon, personalNumber, passwordHasher.Hash(password), firstName, lastName, 
+                fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
         }
-
-        public void AddAuthToPerson(Guid authId) // Domain Service???
+        
+        public void AddAuthToPerson(string authName) // Domain Service???
         {
-            CheckRule(new PersonAuthRule(PersonAuths, authId));
+            CheckRule(new PersonAuthRule(PersonAuths, authName));
 
-            _personAuths.Add(PersonAuth.CreateAuthForPerson(Id, authId));
+            _personAuths.Add(PersonAuth.CreateAuthForPerson(Id, authName));
             
-            AddDomainEvent(new PersonAuthAddedEvent(Id, authId));
-        }
-
-        public void AddFunctionForPerson(Guid eduBlockId, string function) // Domain Service???
-        {
-            // check exist edublock!!!
-            // check function in this edublock
-
-            _personFunctions.Add(PersonFunction.CreateFunctionForPersonInEduBlock(Id, eduBlockId, function));
-            
-            AddDomainEvent(new PersonFunctionInEduBlockAddedEvent(Id, eduBlockId, function));
+            AddDomainEvent(new PersonAuthAddedEvent(Id, authName));
         }
     }
 }

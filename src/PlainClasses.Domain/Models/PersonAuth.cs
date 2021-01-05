@@ -7,25 +7,24 @@ namespace PlainClasses.Domain.Models
     {
         public Guid Id { get; private set; }
         public Guid PersonId { get; private set; }
-        public Guid AuthId { get; private set; }
+        public string AuthName { get; private set; }
 
         #region Ef_Config
 
         public Person Person { get; set; }
-        public Auth Auth { get; set; }
-
+        
         #endregion
 
         private PersonAuth() { }
         
-        private PersonAuth(Guid personId, Guid authId)
+        private PersonAuth(Guid personId, string authName)
         {
             Id = Guid.NewGuid();
             PersonId = personId;
-            AuthId = authId;
+            AuthName = authName;
         }
 
-        public static PersonAuth CreateAuthForPerson(Guid personId, Guid authId)
-            => new PersonAuth(personId, authId);
+        public static PersonAuth CreateAuthForPerson(Guid personId, string authName)
+            => new PersonAuth(personId, authName);
     }
 }

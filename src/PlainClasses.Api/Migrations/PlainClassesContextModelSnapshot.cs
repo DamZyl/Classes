@@ -19,20 +19,6 @@ namespace PlainClasses.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.Auth", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Auths");
-                });
-
             modelBuilder.Entity("PlainClasses.Domain.Models.EduBlock", b =>
                 {
                     b.Property<Guid>("Id")
@@ -45,12 +31,18 @@ namespace PlainClasses.Api.Migrations
                     b.Property<string>("EduBlockSubjectName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndEduBlock")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Place")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartEduBlock")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -122,6 +114,9 @@ namespace PlainClasses.Api.Migrations
                     b.Property<Guid>("MilitaryRankId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PersonalNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(11)")
@@ -133,11 +128,10 @@ namespace PlainClasses.Api.Migrations
                         .HasMaxLength(15);
 
                     b.Property<string>("PlatoonAcr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(5)")
                         .HasMaxLength(5);
 
-                    b.Property<Guid>("PlatoonId")
+                    b.Property<Guid?>("PlatoonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Position")
@@ -163,15 +157,13 @@ namespace PlainClasses.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AuthId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("AuthName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthId");
 
                     b.HasIndex("PersonId");
 
@@ -218,9 +210,6 @@ namespace PlainClasses.Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonCount")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Platoons");
@@ -247,25 +236,6 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("PlatoonInEduBlocks");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.Topic", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EduBlockSubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EduBlockSubjectId");
-
-                    b.ToTable("Topics");
-                });
-
             modelBuilder.Entity("PlainClasses.Domain.Models.EduBlock", b =>
                 {
                     b.HasOne("PlainClasses.Domain.Models.EduBlockSubject", "EduBlockSubject")
@@ -285,19 +255,11 @@ namespace PlainClasses.Api.Migrations
 
                     b.HasOne("PlainClasses.Domain.Models.Platoon", "Platoon")
                         .WithMany("Persons")
-                        .HasForeignKey("PlatoonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PlatoonId");
                 });
 
             modelBuilder.Entity("PlainClasses.Domain.Models.PersonAuth", b =>
                 {
-                    b.HasOne("PlainClasses.Domain.Models.Auth", "Auth")
-                        .WithMany("PersonAuths")
-                        .HasForeignKey("AuthId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PlainClasses.Domain.Models.Person", "Person")
                         .WithMany("PersonAuths")
                         .HasForeignKey("PersonId")
@@ -331,15 +293,6 @@ namespace PlainClasses.Api.Migrations
                     b.HasOne("PlainClasses.Domain.Models.Platoon", "Platoon")
                         .WithMany("Platoons")
                         .HasForeignKey("PlatoonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PlainClasses.Domain.Models.Topic", b =>
-                {
-                    b.HasOne("PlainClasses.Domain.Models.EduBlockSubject", "EduBlockSubject")
-                        .WithMany("Topics")
-                        .HasForeignKey("EduBlockSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

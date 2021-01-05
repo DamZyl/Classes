@@ -10,7 +10,5 @@ namespace PlainClasses.Domain.Models
         public string Name { get; set; }
         private ISet<EduBlock> _eduBlocks = new HashSet<EduBlock>();
         public IEnumerable<EduBlock> EduBlocks => _eduBlocks;
-        private ISet<Topic> _topics = new HashSet<Topic>();
-        public IEnumerable<Topic> Topics => _topics;
     }
 }

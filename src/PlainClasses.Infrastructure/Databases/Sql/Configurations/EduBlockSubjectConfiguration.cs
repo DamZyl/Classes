@@ -8,7 +8,7 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
     {
         public void Configure(EntityTypeBuilder<EduBlockSubject> builder)
         {
-            
+            builder.HasKey(x => x.Id);
         }
     }
 }
