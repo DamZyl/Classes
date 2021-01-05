@@ -6,7 +6,7 @@ namespace PlainClasses.Application.Persons.Commands.DeletePerson
     {
         public DeletePersonCommandValidator()
         {
-            RuleFor(x => x.Id)
+            RuleFor(x => x.PersonId)
                 .NotEmpty()
                 .WithMessage("Id is empty.");
         }

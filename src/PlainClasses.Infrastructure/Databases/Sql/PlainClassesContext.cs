@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using PlainClasses.Domain.Models;
-using PlainClasses.Application.Configurations.Options;
 
 namespace PlainClasses.Infrastructure.Databases.Sql
 {

@@ -32,6 +32,10 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             builder.RegisterType<GetPersonForId>()
                 .As<IGetPersonForId>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetEduBlockForId>()
+                .As<IGetEduBlockForId>()
+                .InstancePerLifetimeScope();
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public enum Function
     {
-        
+        Kierownik,
+        Instruktor
     }
 }

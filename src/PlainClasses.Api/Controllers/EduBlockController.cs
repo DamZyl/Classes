@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.EduBlocks.Commands.CreateEduBlock;
+using PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock;
+using PlainClasses.Application.EduBlocks.Queries.GetEduBlock;
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlocks;
 
 namespace PlainClasses.Api.Controllers
@@ -24,9 +27,19 @@ namespace PlainClasses.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<EduBlockViewModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetEduBlocks()
         {
-            var persons = await _mediator.Send(new GetEduBlocksQuery());
+            var eduBlocks = await _mediator.Send(new GetEduBlocksQuery());
 
-            return Ok(persons);
+            return Ok(eduBlocks);
+        }
+        
+        [Route("{id}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(EduBlockDetailViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetEduBlock(Guid id)
+        {
+            var eduBlock = await _mediator.Send(new GetEduBlockQuery { Id = id });
+
+            return Ok(eduBlock);
         }
         
         [Route("")]
@@ -38,6 +51,16 @@ namespace PlainClasses.Api.Controllers
                 request.StartEduBlock, request.EndEduBlock, request.Remarks, request.Place, request.PlatoonIds));
 
             return Created(string.Empty, eduBlock);
-        }      
+        }  
+        
+        [Route("{id}")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> DeleteEduBlock(Guid id)
+        {
+            await _mediator.Send(new DeleteEduBlockCommand { EduBlockId = id});
+
+            return NoContent();
+        }
     }
 }
