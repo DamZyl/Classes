@@ -1,12 +1,13 @@
 using PlainClasses.Domain.Platoons;
+using PlainClasses.Domain.Utils.SharedKernels;
 
-namespace PlainClasses.Domain.Utils.SharedKernels.Rules
+namespace PlainClasses.Application.Platoons.Rules
 {
-    public class PlatoonExistRule : IBusinessRule
+    public class PlatoonDoesNotExistRule : IBusinessRule
     {
         private readonly Platoon _platoon;
 
-        public PlatoonExistRule(Platoon platoon)
+        public PlatoonDoesNotExistRule(Platoon platoon)
         {
             _platoon = platoon;
         }

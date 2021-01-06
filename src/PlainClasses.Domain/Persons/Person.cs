@@ -96,7 +96,7 @@ namespace PlainClasses.Domain.Persons
                     fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
             
             var platoon = getPlatoonForId.Get((Guid)platoonId);
-            CheckRule(new PlatoonExistRule(platoon));
+            CheckRule(new PlatoonExistsRule(platoon));
                 
             return new Person(militaryRank, platoon, personalNumber, passwordHasher.Hash(password), firstName, lastName, 
                 fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);

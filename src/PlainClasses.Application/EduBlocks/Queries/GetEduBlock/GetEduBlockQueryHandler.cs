@@ -39,7 +39,7 @@ namespace PlainClasses.Application.EduBlocks.Queries.GetEduBlock
                                     "[PersonFunction].[Id], " +
                                     "(SELECT [Person].[MilitaryRankAcr] + ' ' + [Person].[FirstName] + ' ' + [Person].[LastName] " + 
                                         "FROM Persons AS [Person] " + 
-                                        "WHERE [Person].[Id] = [PersonFunction].[PersonId]) AS Person," +
+                                        "WHERE [Person].[Id] = [PersonFunction].[PersonId]) AS [Person]," +
                                     "[PersonFunction].[Function] " +
                                     "FROM PersonFunctions AS [PersonFunction] " +
                                     "WHERE [PersonFunction].[EduBlockId] = @Id ";
@@ -51,7 +51,7 @@ namespace PlainClasses.Application.EduBlocks.Queries.GetEduBlock
                                         "[PlatoonInEduBlock].[Id], " +
                                         "(SELECT [Platoon].[Acronym] " + 
                                             "FROM Platoons AS [Platoon] " +
-                                            "WHERE [Platoon].[Id] = [PlatoonInEduBlock].[PlatoonId]) AS Platoon " +
+                                            "WHERE [Platoon].[Id] = [PlatoonInEduBlock].[PlatoonId]) AS [Platoon] " +
                                         "FROM PlatoonInEduBlocks AS [PlatoonInEduBlock] " +
                                         "WHERE [PlatoonInEduBlock].[EduBlockId] = @Id ";
             
