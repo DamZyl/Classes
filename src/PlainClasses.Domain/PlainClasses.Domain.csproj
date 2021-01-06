@@ -10,9 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EduBlocks\DomainServices" />
-    <Folder Include="Persons\DomainServices" />
     <Folder Include="Platoons\DomainServices" />
+    <Folder Include="Platoons\Rules" />
   </ItemGroup>
 
 </Project>

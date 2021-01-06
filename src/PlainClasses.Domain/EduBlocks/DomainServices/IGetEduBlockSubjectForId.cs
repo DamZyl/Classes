@@ -1,7 +1,6 @@
 using System;
-using PlainClasses.Domain.EduBlocks;
 
-namespace PlainClasses.Domain.DomainServices
+namespace PlainClasses.Domain.EduBlocks.DomainServices
 {
     public interface IGetEduBlockSubjectForId
     {

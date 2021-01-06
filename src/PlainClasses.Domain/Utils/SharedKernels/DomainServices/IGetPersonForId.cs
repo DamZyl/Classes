@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using PlainClasses.Domain.Persons;
 
-namespace PlainClasses.Domain.DomainServices
+namespace PlainClasses.Domain.Utils.SharedKernels.DomainServices
 {
     public interface IGetPersonForId
     {

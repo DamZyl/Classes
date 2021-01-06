@@ -1,4 +1,4 @@
-namespace PlainClasses.Domain.DomainServices
+namespace PlainClasses.Domain.Persons.DomainServices
 {
     public interface IPersonPasswordHasher
     {

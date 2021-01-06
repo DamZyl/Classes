@@ -1,5 +1,5 @@
 using PlainClasses.Application.Auths;
-using PlainClasses.Domain.DomainServices;
+using PlainClasses.Domain.Persons.DomainServices;
 
 namespace PlainClasses.Application.Persons.DomainServices
 {

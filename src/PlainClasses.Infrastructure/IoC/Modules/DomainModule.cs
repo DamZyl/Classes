@@ -1,7 +1,9 @@
 using Autofac;
 using PlainClasses.Application.EduBlocks.DomainServices;
 using PlainClasses.Application.Persons.DomainServices;
-using PlainClasses.Domain.DomainServices;
+using PlainClasses.Domain.EduBlocks.DomainServices;
+using PlainClasses.Domain.Persons.DomainServices;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Infrastructure.IoC.Modules
 {

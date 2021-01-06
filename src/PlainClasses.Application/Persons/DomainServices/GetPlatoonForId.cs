@@ -1,8 +1,8 @@
 using System;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
-using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.Platoons;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Application.Persons.DomainServices
 {

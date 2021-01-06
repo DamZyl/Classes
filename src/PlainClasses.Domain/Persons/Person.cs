@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.EduBlocks;
+using PlainClasses.Domain.Persons.DomainServices;
 using PlainClasses.Domain.Persons.Enums;
 using PlainClasses.Domain.Persons.Events;
 using PlainClasses.Domain.Persons.Rules;
 using PlainClasses.Domain.Platoons;
-using PlainClasses.Domain.Platoons.Rules;
 using PlainClasses.Domain.Utils.Extensions;
 using PlainClasses.Domain.Utils.SharedKernels;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
+using PlainClasses.Domain.Utils.SharedKernels.Rules;
 
 namespace PlainClasses.Domain.Persons
 {

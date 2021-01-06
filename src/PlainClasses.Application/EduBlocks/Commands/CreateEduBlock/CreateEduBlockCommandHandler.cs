@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using PlainClasses.Application.Configurations.Dispatchers;
-using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.EduBlocks;
+using PlainClasses.Domain.EduBlocks.DomainServices;
 using PlainClasses.Domain.Repositories;
 
 namespace PlainClasses.Application.EduBlocks.Commands.CreateEduBlock

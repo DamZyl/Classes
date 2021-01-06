@@ -1,6 +1,6 @@
-using PlainClasses.Domain.Utils.SharedKernels;
+using PlainClasses.Domain.Platoons;
 
-namespace PlainClasses.Domain.Platoons.Rules
+namespace PlainClasses.Domain.Utils.SharedKernels.Rules
 {
     public class PlatoonExistRule : IBusinessRule
     {

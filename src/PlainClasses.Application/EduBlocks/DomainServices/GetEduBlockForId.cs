@@ -2,8 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
-using PlainClasses.Domain.DomainServices;
 using PlainClasses.Domain.EduBlocks;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Application.EduBlocks.DomainServices
 {
