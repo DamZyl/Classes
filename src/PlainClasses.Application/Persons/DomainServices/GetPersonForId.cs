@@ -2,8 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Dapper;
 using PlainClasses.Application.Configurations.Data;
-using PlainClasses.Domain.DomainServices;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Persons;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Application.Persons.DomainServices
 {
@@ -36,6 +36,33 @@ namespace PlainClasses.Application.Persons.DomainServices
             
             const string sql = "SELECT " +
                                "[Person].[Id] " +
+                               "FROM Persons AS [Person] " +
+                               "WHERE [Person].[Id] = @PersonId ";
+            
+            var person = await connection.QuerySingleOrDefaultAsync<Person>(sql, new { personId });
+
+            return person;
+        }
+        
+        public async Task<Person> GetDetailAsync(Guid personId)
+        {
+            var connection = _sqlConnectionFactory.GetOpenConnection();
+            
+            const string sql = "SELECT " +
+                               "[Person].[Id], " +
+                               "[Person].[PersonalNumber], " +
+                               "[Person].[Password], " +
+                               "[Person].[MilitaryRankId], " +
+                               "[Person].[MilitaryRankAcr], " +
+                               "[Person].[PlatoonId], " +
+                               "[Person].[PlatoonAcr], " +
+                               "[Person].[FirstName], " +
+                               "[Person].[LastName], " +
+                               "[Person].[FatherName], " +
+                               "[Person].[BirthDate], " +
+                               "[Person].[WorkPhoneNumber], " +
+                               "[Person].[PersonalPhoneNumber], " +
+                               "[Person].[Position] " +
                                "FROM Persons AS [Person] " +
                                "WHERE [Person].[Id] = @PersonId ";
             

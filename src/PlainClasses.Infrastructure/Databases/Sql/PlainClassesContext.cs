@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using PlainClasses.Domain.Models;
-using PlainClasses.Application.Configurations.Options;
+using PlainClasses.Domain.EduBlocks;
+using PlainClasses.Domain.Persons;
+using PlainClasses.Domain.Platoons;
 
 namespace PlainClasses.Infrastructure.Databases.Sql
 {

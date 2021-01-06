@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PlainClasses.Domain.Models;
+using PlainClasses.Domain.Platoons;
 
 namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
 {

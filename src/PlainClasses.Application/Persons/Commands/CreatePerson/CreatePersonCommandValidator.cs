@@ -19,9 +19,12 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
                 .NotEmpty()
                 .WithMessage("MilitaryRankId is empty.");
             
-            // RuleFor(x => x.PlatoonId)
-            //     .NotEmpty()
-            //     .WithMessage("PlatoonId is empty.");
+            RuleFor(x => x.Password)
+                .NotEmpty()
+                .WithMessage("Password is empty.");
+            RuleFor(x => x.Password)
+                .MinimumLength(8)
+                .WithMessage("Password should have 8 letters.");
             
             RuleFor(x => x.FirstName)
                 .NotEmpty()
@@ -50,7 +53,7 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
                 .WithMessage("WorkPhoneNumber should have format 'xxx-xxx-xxx'.");
             RuleFor(x => x.Position)
                 .NotEmpty()
-                .WithMessage("FirstName is empty.");
+                .WithMessage("Position is empty.");
         }
 
         private static bool CheckPhoneNumberFormat(string number)

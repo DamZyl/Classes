@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using PlainClasses.Domain.Models.Utils;
 using PlainClasses.Domain.Repositories;
+using PlainClasses.Domain.Utils.SharedKernels;
 using PlainClasses.Infrastructure.Databases.Sql;
 
 namespace PlainClasses.Infrastructure.Repositories
