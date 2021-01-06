@@ -34,6 +34,16 @@ namespace PlainClasses.Domain.Platoons
         public static Platoon CreatePlatoon(string name, string acronym, string commander)
             => new Platoon(name, acronym, commander);
 
+        public void UpdatePlatoonData(string commander)
+        {
+            if (Commander != commander)
+            {
+                Commander = commander;
+            }
+            
+            AddDomainEvent(new PlatoonDataUpdatedEvent(Id));
+        }
+
         public void AddPersonToPlatoon(Person person)
         {
             _persons.Add(person);

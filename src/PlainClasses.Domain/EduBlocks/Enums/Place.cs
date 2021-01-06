@@ -3,5 +3,6 @@
     public enum Place
     {
         Strzelnica = 0,
+        Poligon
     }
 }

@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.EduBlocks.Commands.CreateEduBlock;
 using PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock;
+using PlainClasses.Application.EduBlocks.Commands.UpdateEduBlock;
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlock;
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlocks;
 
@@ -54,11 +55,22 @@ namespace PlainClasses.Api.EduBlocks
         }  
         
         [Route("{id}")]
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> UpdateEduBlock(Guid id, [FromBody]UpdateEduBlockRequest request)
+        {
+            await _mediator.Send(new UpdateEduBlockCommand(id, request.Remarks, request.Place, 
+                request.StartEduBlock, request.EndEduBlock));
+
+            return NoContent();
+        }
+        
+        [Route("{id}")]
         [HttpDelete]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteEduBlock(Guid id)
         {
-            await _mediator.Send(new DeleteEduBlockCommand { EduBlockId = id});
+            await _mediator.Send(new DeleteEduBlockCommand(id));
 
             return NoContent();
         }

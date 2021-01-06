@@ -12,7 +12,8 @@ namespace PlainClasses.Application.Persons.DomainServices
             _passwordHasher = passwordHasher;
         }
         
-        public string Hash(string password)
-            => _passwordHasher.Hash(password);
+        public string Hash(string password) => _passwordHasher.Hash(password);
+
+        public bool Check(string hash, string password) => _passwordHasher.Check(hash, password);
     }
 }

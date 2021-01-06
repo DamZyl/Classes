@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.Platoons.Commands.CreatePlatoon;
 using PlainClasses.Application.Platoons.Commands.DeletePlatoon;
+using PlainClasses.Application.Platoons.Commands.UpdatePlatoon;
 using PlainClasses.Application.Platoons.Queries.GetPlatoon;
 using PlainClasses.Application.Platoons.Queries.GetPlatoons;
 
@@ -53,11 +54,21 @@ namespace PlainClasses.Api.Platoons
         }
         
         [Route("{id}")]
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> UpdatePlatoon(Guid id, [FromBody]UpdatePlatoonRequest request)
+        {
+            await _mediator.Send(new UpdatePlatoonCommand(id, request.Commander));
+
+            return NoContent();
+        }
+        
+        [Route("{id}")]
         [HttpDelete]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeletePlatoon(Guid id)
         {
-            await _mediator.Send(new DeletePlatoonCommand { PlatoonId = id});
+            await _mediator.Send(new DeletePlatoonCommand(id));
 
             return NoContent();
         }

@@ -8,5 +8,6 @@ namespace PlainClasses.Domain.Utils.SharedKernels.DomainServices
     {
         EduBlock Get(Guid eduBlockId);
         Task<EduBlock> GetAsync(Guid eduBlockId);
+        Task<EduBlock> GetDetailAsync(Guid eduBlockId);
     }
 }

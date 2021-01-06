@@ -64,8 +64,8 @@ namespace PlainClasses.Domain.Persons
             AddDomainEvent(new PersonCreatedEvent(Id));
         }
         
-        private Person(MilitaryRank militaryRank, string personalNumber, string password, string firstName, 
-            string lastName, string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
+        private Person(MilitaryRank militaryRank, string personalNumber, string password, string firstName, string lastName, 
+            string fatherName, DateTime birthDate, string workPhoneNumber, string personalPhoneNumber, string position)
         {
             Id = Guid.NewGuid();
             PersonalNumber = personalNumber;
@@ -101,7 +101,60 @@ namespace PlainClasses.Domain.Persons
             return new Person(militaryRank, platoon, personalNumber, passwordHasher.Hash(password), firstName, lastName, 
                 fatherName, birthDate, workPhoneNumber, personalPhoneNumber, position);
         }
-        
+
+        public void UpdatePersonalData(Guid militaryRankId, Guid? platoonId, string password, string lastName,
+            string workPhoneNumber, string personalPhoneNumber, string position, IPersonPasswordHasher passwordHasher, 
+            IGetMilitaryRankForId getMilitaryRankForId, IGetPlatoonForId getPlatoonForId)
+        {
+            var militaryRank = getMilitaryRankForId.Get(militaryRankId);
+            CheckRule(new MilitaryRankExistRule(militaryRank));
+
+            if (MilitaryRankId != militaryRankId)
+            {
+                MilitaryRankId = militaryRankId;
+                MilitaryRankAcr = militaryRank.Acronym;
+            }
+
+            if (platoonId != null)
+            {
+                var platoon = getPlatoonForId.Get((Guid)platoonId);
+                CheckRule(new PlatoonExistsRule(platoon));
+
+                if (PlatoonId != platoonId)
+                {
+                    PlatoonId = platoonId;
+                    PlatoonAcr = platoon.Acronym;
+                }
+            }
+
+            if (!passwordHasher.Check(Password, password))
+            {
+                Password = passwordHasher.Hash(password);
+            }
+
+            if (LastName != lastName.ToUppercaseFirstInvariant())
+            {
+                LastName = lastName;
+            }
+
+            if (WorkPhoneNumber != workPhoneNumber)
+            {
+                WorkPhoneNumber = workPhoneNumber;
+            }
+
+            if (PersonalPhoneNumber != personalPhoneNumber)
+            {
+                PersonalPhoneNumber = personalPhoneNumber;
+            }
+
+            if (Enum.IsDefined(typeof(PersonPosition), position) && Position.ToString() != position.ToUppercaseFirstInvariant())
+            {
+                Position = Enum.Parse<PersonPosition>(position);
+            }
+            
+            AddDomainEvent(new PersonDataUpdatedEvent(Id));
+        }
+
         public void AddAuthToPerson(string authName) // Domain Service???
         {
             CheckRule(new PersonAuthRule(PersonAuths, authName));

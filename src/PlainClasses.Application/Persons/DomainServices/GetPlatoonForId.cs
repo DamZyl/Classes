@@ -31,7 +31,7 @@ namespace PlainClasses.Application.Persons.DomainServices
             return platoon;
         }
         
-        public Task<Platoon> GetAsync(Guid platoonId)
+        public async Task<Platoon> GetAsync(Guid platoonId)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
             
@@ -40,7 +40,24 @@ namespace PlainClasses.Application.Persons.DomainServices
                                       "FROM Platoons AS [Platoon] " +
                                       "WHERE [Platoon].[Id] = @PlatoonId ";
             
-            var platoon = connection.QuerySingleOrDefaultAsync<Platoon>(sqlPlatoon, new { platoonId });
+            var platoon = await connection.QuerySingleOrDefaultAsync<Platoon>(sqlPlatoon, new { platoonId });
+
+            return platoon;
+        }
+
+        public async Task<Platoon> GetDetailAsync(Guid platoonId)
+        {
+            var connection = _sqlConnectionFactory.GetOpenConnection();
+            
+            const string sqlPlatoon = "SELECT " + 
+                                      "[Platoon].[Id], " +
+                                      "[Platoon].[Name], " +
+                                      "[Platoon].[Acronym], " +
+                                      "[Platoon].[Commander] " +
+                                      "FROM Platoons AS [Platoon] " +
+                                      "WHERE [Platoon].[Id] = @PlatoonId ";
+            
+            var platoon = await connection.QuerySingleOrDefaultAsync<Platoon>(sqlPlatoon, new { platoonId });
 
             return platoon;
         }

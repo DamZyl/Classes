@@ -6,5 +6,10 @@ namespace PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock
     public class DeleteEduBlockCommand : CommandBase
     {
         public Guid EduBlockId { get; set; }
+
+        public DeleteEduBlockCommand(Guid eduBlockId)
+        {
+            EduBlockId = eduBlockId;
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace PlainClasses.Domain.Utils.SharedKernels.DomainServices
     {
         Platoon Get(Guid platoonId);
         Task<Platoon> GetAsync(Guid platoonId);
+        Task<Platoon> GetDetailAsync(Guid platoonId);
     }
 }

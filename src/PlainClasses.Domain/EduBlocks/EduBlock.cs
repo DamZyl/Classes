@@ -66,6 +66,31 @@ namespace PlainClasses.Domain.EduBlocks
             return new EduBlock(eduBlockSubject, startEduBlock, endEduBlock, remarks, place, platoons);
         }
 
+        public void UpdateEduBlockData(string remarks, string place, DateTime startEduBlock, DateTime endEduBlock)
+        {
+            if (Remarks != remarks)
+            {
+                Remarks = remarks;
+            }
+
+            if (Enum.IsDefined(typeof(Place), place) && Place.ToString() != place.ToUppercaseFirstInvariant())
+            {
+                Place = Enum.Parse<Place>(place);
+            }
+
+            if (StartEduBlock != startEduBlock)
+            {
+                StartEduBlock = startEduBlock;
+            }
+
+            if (EndEduBlock != endEduBlock)
+            {
+                EndEduBlock = endEduBlock;
+            }
+            
+            AddDomainEvent(new EduBlockDataUpdatedEvent(Id));
+        }
+
         public void AddPlatoonToEduBlock(Guid platoonId, IGetPlatoonForId getPlatoonForId)
         {
             var platoon = getPlatoonForId.Get(platoonId);

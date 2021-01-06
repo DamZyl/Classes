@@ -43,5 +43,25 @@ namespace PlainClasses.Application.EduBlocks.DomainServices
 
             return eduBlock;
         }
+
+        public async Task<EduBlock> GetDetailAsync(Guid eduBlockId)
+        {
+            var connection = _sqlConnectionFactory.GetOpenConnection();
+            
+            const string sql = "SELECT " +
+                               "[EduBlock].[Id], " +
+                               "[EduBlock].[EduBlockSubjectId], " +
+                               "[EduBlock].[EduBlockSubjectName], " +
+                               "[EduBlock].[Remarks], " +
+                               "[EduBlock].[Place], " +
+                               "[EduBlock].[StartEduBlock], " +
+                               "[EduBlock].[EndEduBlock] " +
+                               "FROM EduBlocks AS [EduBlock] " +
+                               "WHERE [EduBlock].[Id] = @EduBlockId ";
+            
+            var eduBlock = await connection.QuerySingleOrDefaultAsync<EduBlock>(sql, new { eduBlockId });
+
+            return eduBlock;
+        }
     }
 }

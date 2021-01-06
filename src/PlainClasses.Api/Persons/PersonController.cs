@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Application.Persons.Commands.CreatePerson;
 using PlainClasses.Application.Persons.Commands.DeletePerson;
+using PlainClasses.Application.Persons.Commands.UpdatePerson;
 using PlainClasses.Application.Persons.Queries.GetPerson;
 using PlainClasses.Application.Persons.Queries.GetPersons;
 
@@ -56,11 +57,22 @@ namespace PlainClasses.Api.Persons
 
         
         [Route("{id}")]
+        [HttpPut]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> UpdatePerson(Guid id, [FromBody]UpdatePersonRequest request)
+        {
+            await _mediator.Send(new UpdatePersonCommand(id, request.MilitaryRankId, request.PlatoonId, request.Password, 
+                request.LastName, request.WorkPhoneNumber, request.PersonalPhoneNumber, request.Position));
+
+            return NoContent();
+        } 
+        
+        [Route("{id}")]
         [HttpDelete]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeletePerson(Guid id)
         {
-            await _mediator.Send(new DeletePersonCommand { PersonId = id});
+            await _mediator.Send(new DeletePersonCommand(id));
 
             return NoContent();
         }
