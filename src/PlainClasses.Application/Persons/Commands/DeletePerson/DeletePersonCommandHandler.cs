@@ -27,7 +27,7 @@ namespace PlainClasses.Application.Persons.Commands.DeletePerson
             ExceptionHelper.CheckRule(new PersonDoesNotExistRule(person));
 
             await _unitOfWork.Repository<Person>().DeleteAsync(person);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

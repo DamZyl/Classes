@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using PlainClasses.Domain.EduBlocks;
 using PlainClasses.Domain.Persons;
+using PlainClasses.Domain.Platoons.DomainServices;
 using PlainClasses.Domain.Platoons.Events;
+using PlainClasses.Domain.Platoons.Rules;
 using PlainClasses.Domain.Utils.SharedKernels;
+using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Domain.Platoons
 {
@@ -44,8 +47,14 @@ namespace PlainClasses.Domain.Platoons
             AddDomainEvent(new PlatoonDataUpdatedEvent(Id));
         }
 
-        public void AddPersonToPlatoon(Person person)
+        public void AddPersonToPlatoon(Guid personId, IGetPersonForId getPersonForId, 
+            IChangePlatoonForPerson changePlatoonForPerson)
         {
+            var person = getPersonForId.GetDetail(personId);
+            CheckRule(new PersonExistRule(person));
+            CheckRule(new PersonIsInPlatoonRule(_persons, person));
+            
+            changePlatoonForPerson.ChangePlatoon(person, Id);
             _persons.Add(person);
             
             AddDomainEvent(new PersonToPlatoonAddedEvent(Id, person.Id));

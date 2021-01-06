@@ -27,10 +27,6 @@ namespace PlainClasses.Domain.EduBlocks
         }
 
         public static PlatoonInEduBlock AddPlatoonToEduBlock(Guid eduBlockId, Guid platoonId)
-        {
-            // check rule!!!
-
-            return new PlatoonInEduBlock(eduBlockId, platoonId);
-        }
+            => new PlatoonInEduBlock(eduBlockId, platoonId);
     }
 }

@@ -40,7 +40,7 @@ namespace PlainClasses.Application.Persons.Commands.UpdatePerson
                 _getMilitaryRankForId, _getPlatoonForId);
 
             await _unitOfWork.Repository<Person>().EditAsync(person);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

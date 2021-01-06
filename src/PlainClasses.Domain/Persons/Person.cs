@@ -155,11 +155,18 @@ namespace PlainClasses.Domain.Persons
             AddDomainEvent(new PersonDataUpdatedEvent(Id));
         }
 
-        public void AddAuthToPerson(string authName) // Domain Service???
+        public void ChangePlatoon(Platoon platoon)
+        {
+            PlatoonId = platoon.Id;
+            PlatoonAcr = platoon.Acronym;
+        }
+
+        public void AddAuthToPerson(string authName)
         {
             CheckRule(new PersonAuthRule(PersonAuths, authName));
 
-            _personAuths.Add(PersonAuth.CreateAuthForPerson(Id, authName));
+            var auth = PersonAuth.CreateAuthForPerson(Id, authName);
+            _personAuths.Add(auth);
             
             AddDomainEvent(new PersonAuthAddedEvent(Id, authName));
         }

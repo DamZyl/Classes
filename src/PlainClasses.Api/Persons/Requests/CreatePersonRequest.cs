@@ -1,6 +1,6 @@
 using System;
 
-namespace PlainClasses.Api.Persons
+namespace PlainClasses.Api.Persons.Requests
 {
     public class CreatePersonRequest
     {

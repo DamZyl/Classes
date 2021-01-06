@@ -95,6 +95,7 @@ namespace PlainClasses.Domain.EduBlocks
         {
             var platoon = getPlatoonForId.Get(platoonId);
             CheckRule(new PlatoonExistsRule(platoon));
+            CheckRule(new PlatoonIsInEduBlockRule(_platoons, platoon));
 
             _platoons.Add(PlatoonInEduBlock.AddPlatoonToEduBlock(Id, platoon.Id));
             

@@ -1,4 +1,4 @@
-namespace PlainClasses.Api.Platoons
+namespace PlainClasses.Api.Platoons.Requests
 {
     public class CreatePlatoonRequest
     {

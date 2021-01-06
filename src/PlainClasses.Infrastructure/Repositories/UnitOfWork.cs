@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PlainClasses.Domain.Repositories;
 using PlainClasses.Domain.Utils.SharedKernels;
@@ -30,9 +31,9 @@ namespace PlainClasses.Infrastructure.Repositories
             return repository;
         }
 
-        public async Task<int> CommitAsync()
+        public async Task<int> CommitAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync(cancellationToken);
         }
 
         public void Rollback()

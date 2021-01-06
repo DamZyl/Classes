@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PlainClasses.Api.EduBlocks
+namespace PlainClasses.Api.EduBlocks.Requests
 {
     public class CreateEduBlockRequest
     {

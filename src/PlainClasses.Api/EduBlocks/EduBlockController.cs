@@ -4,6 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PlainClasses.Api.EduBlocks.Requests;
+using PlainClasses.Application.EduBlocks.Commands.AddPlatoon;
 using PlainClasses.Application.EduBlocks.Commands.CreateEduBlock;
 using PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock;
 using PlainClasses.Application.EduBlocks.Commands.UpdateEduBlock;
@@ -53,6 +55,16 @@ namespace PlainClasses.Api.EduBlocks
 
             return Created(string.Empty, eduBlock);
         }  
+        
+        [Route("{id}/platoon/{platoonId}")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnEduBlockViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddPlatoonToEduBlock(Guid id, Guid platoonId) 
+        {
+            var eduBlock = await _mediator.Send(new AddPlatoonCommand(id, platoonId));
+
+            return Created(string.Empty, eduBlock);
+        }
         
         [Route("{id}")]
         [HttpPut]

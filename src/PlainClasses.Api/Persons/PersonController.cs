@@ -4,6 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PlainClasses.Api.Persons.Requests;
+using PlainClasses.Application.Persons.Commands.AddAuth;
 using PlainClasses.Application.Persons.Commands.CreatePerson;
 using PlainClasses.Application.Persons.Commands.DeletePerson;
 using PlainClasses.Application.Persons.Commands.UpdatePerson;
@@ -53,8 +55,17 @@ namespace PlainClasses.Api.Persons
                 request.WorkPhoneNumber, request.PersonalPhoneNumber, request.Position));
 
             return Created(string.Empty, person);
-        }      
+        }     
+        
+        [Route("{id}/auth")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnPersonViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddAuthToPerson(Guid id, [FromBody]AddAuthRequest request)
+        {
+            var person = await _mediator.Send(new AddAuthCommand(id, request.AuthName));
 
+            return Created(string.Empty, person);
+        } 
         
         [Route("{id}")]
         [HttpPut]

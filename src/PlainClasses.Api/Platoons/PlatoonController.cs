@@ -4,6 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PlainClasses.Api.Platoons.Requests;
+using PlainClasses.Application.Platoons.Commands.AddPerson;
 using PlainClasses.Application.Platoons.Commands.CreatePlatoon;
 using PlainClasses.Application.Platoons.Commands.DeletePlatoon;
 using PlainClasses.Application.Platoons.Commands.UpdatePlatoon;
@@ -49,6 +51,16 @@ namespace PlainClasses.Api.Platoons
         public async Task<IActionResult> CreatePlatoon([FromBody]CreatePlatoonRequest request) 
         {
             var platoon = await _mediator.Send(new CreatePlatoonCommand(request.Name, request.Acronym, request.Commander));
+
+            return Created(string.Empty, platoon);
+        }
+        
+        [Route("{id}/person/{personId}")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnPlatoonViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddPersonToPlatoon(Guid id, Guid personId)
+        {
+            var platoon = await _mediator.Send(new AddPersonCommand(id, personId));
 
             return Created(string.Empty, platoon);
         }

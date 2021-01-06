@@ -20,7 +20,7 @@ namespace PlainClasses.Application.Platoons.Commands.CreatePlatoon
             var platoon = Platoon.CreatePlatoon(request.Name, request.Acronym, request.Commander);
 
             await _unitOfWork.Repository<Platoon>().AddAsync(platoon);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return new ReturnPlatoonViewModel { Id = platoon.Id };
         }

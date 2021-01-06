@@ -9,9 +9,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Platoons\DomainServices" />
-    <Folder Include="Platoons\Rules" />
-  </ItemGroup>
-
 </Project>
