@@ -44,6 +44,14 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             builder.RegisterType<ChangePlatoonForPerson>()
                 .As<IChangePlatoonForPerson>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPlatoonInEduBlockForId>()
+                .As<IGetPlatoonInEduBlockForId>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPersonFunctionForId>()
+                .As<IGetPersonFunctionForId>()
+                .InstancePerLifetimeScope();
         }
     }
 }

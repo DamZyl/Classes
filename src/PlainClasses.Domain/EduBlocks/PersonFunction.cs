@@ -2,6 +2,7 @@
 using PlainClasses.Domain.EduBlocks.Enums;
 using PlainClasses.Domain.EduBlocks.Rules;
 using PlainClasses.Domain.Persons;
+using PlainClasses.Domain.Utils.Extensions;
 using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Domain.EduBlocks
@@ -27,7 +28,7 @@ namespace PlainClasses.Domain.EduBlocks
             Id = Guid.NewGuid();
             PersonId = personId;
             EduBlockId = eduBlockId;
-            Function = Enum.Parse<Function>(function);
+            Function = Enum.Parse<Function>(function.ToUppercaseFirstInvariant());
         }
 
         public static PersonFunction CreateFunctionForPersonInEduBlock(Guid personId, Guid eduBlockId, string function)
