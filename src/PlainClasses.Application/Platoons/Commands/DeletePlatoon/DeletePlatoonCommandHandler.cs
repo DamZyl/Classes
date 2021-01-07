@@ -27,7 +27,7 @@ namespace PlainClasses.Application.Platoons.Commands.DeletePlatoon
             ExceptionHelper.CheckRule(new PlatoonDoesNotExistRule(platoon));
 
             await _unitOfWork.Repository<Platoon>().DeleteAsync(platoon);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

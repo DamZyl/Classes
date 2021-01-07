@@ -29,7 +29,7 @@ namespace PlainClasses.Application.EduBlocks.Commands.UpdateEduBlock
             eduBlock.UpdateEduBlockData(request.Remarks, request.Place, request.StartEduBlock, request.EndEduBlock);
 
             await _unitOfWork.Repository<EduBlock>().EditAsync(eduBlock);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

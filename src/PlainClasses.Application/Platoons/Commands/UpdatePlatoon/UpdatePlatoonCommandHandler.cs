@@ -29,7 +29,7 @@ namespace PlainClasses.Application.Platoons.Commands.UpdatePlatoon
             platoon.UpdatePlatoonData(request.Commander);
 
             await _unitOfWork.Repository<Platoon>().EditAsync(platoon);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

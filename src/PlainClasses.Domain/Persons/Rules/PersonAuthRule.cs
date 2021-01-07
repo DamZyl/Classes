@@ -15,7 +15,8 @@ namespace PlainClasses.Domain.Persons.Rules
             _authName = authName;
         }
 
-        public bool IsBroken() => _personAuths.All(x => x.AuthName != _authName);
+        public bool IsBroken() => _personAuths.Any(x => x.AuthName == _authName);
+        
 
         public string Message => "Person already has this permission.";
     }

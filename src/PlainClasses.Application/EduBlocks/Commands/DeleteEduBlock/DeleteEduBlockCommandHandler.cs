@@ -27,7 +27,7 @@ namespace PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock
             ExceptionHelper.CheckRule(new EduBlockDoesNotExistRule(eduBlock));
             
             await _unitOfWork.Repository<EduBlock>().DeleteAsync(eduBlock);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
             
             return Unit.Value;
         }

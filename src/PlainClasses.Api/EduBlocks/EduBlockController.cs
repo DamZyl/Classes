@@ -4,8 +4,13 @@ using System.Net;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PlainClasses.Api.EduBlocks.Requests;
+using PlainClasses.Application.EduBlocks.Commands.AddFunction;
+using PlainClasses.Application.EduBlocks.Commands.AddPlatoon;
 using PlainClasses.Application.EduBlocks.Commands.CreateEduBlock;
 using PlainClasses.Application.EduBlocks.Commands.DeleteEduBlock;
+using PlainClasses.Application.EduBlocks.Commands.DeleteFunction;
+using PlainClasses.Application.EduBlocks.Commands.DeletePlatoon;
 using PlainClasses.Application.EduBlocks.Commands.UpdateEduBlock;
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlock;
 using PlainClasses.Application.EduBlocks.Queries.GetEduBlocks;
@@ -54,6 +59,26 @@ namespace PlainClasses.Api.EduBlocks
             return Created(string.Empty, eduBlock);
         }  
         
+        [Route("{id}/platoon/{platoonId}")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnEduBlockViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddPlatoonToEduBlock(Guid id, Guid platoonId) 
+        {
+            var eduBlock = await _mediator.Send(new AddPlatoonCommand(id, platoonId));
+
+            return Created(string.Empty, eduBlock);
+        }
+        
+        [Route("{id}/function")]
+        [HttpPost]
+        [ProducesResponseType(typeof(ReturnEduBlockViewModel), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddFunctionForPersonInEduBlock(Guid id, [FromBody]AddFunctionRequest request) 
+        {
+            var eduBlock = await _mediator.Send(new AddFunctionCommand(id, request.PersonId, request.Function));
+
+            return Created(string.Empty, eduBlock);
+        }
+        
         [Route("{id}")]
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -71,6 +96,26 @@ namespace PlainClasses.Api.EduBlocks
         public async Task<IActionResult> DeleteEduBlock(Guid id)
         {
             await _mediator.Send(new DeleteEduBlockCommand(id));
+
+            return NoContent();
+        }
+        
+        [Route("{id}/platoon/{platoonId}")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeletePlatoonFromEduBlock(Guid id, Guid platoonId)
+        {
+            await _mediator.Send(new DeletePlatoonFromEduBlockCommand(id, platoonId));
+
+            return NoContent();
+        }
+        
+        [Route("{id}/function/{functionId}")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeleteFunctionPersonFromEduBlock(Guid id, Guid functionId)
+        {
+            await _mediator.Send(new DeleteFunctionCommand(id, functionId));
 
             return NoContent();
         }

@@ -1,8 +1,10 @@
 using Autofac;
 using PlainClasses.Application.EduBlocks.DomainServices;
 using PlainClasses.Application.Persons.DomainServices;
+using PlainClasses.Application.Platoons.DomainServices;
 using PlainClasses.Domain.EduBlocks.DomainServices;
 using PlainClasses.Domain.Persons.DomainServices;
+using PlainClasses.Domain.Platoons.DomainServices;
 using PlainClasses.Domain.Utils.SharedKernels.DomainServices;
 
 namespace PlainClasses.Infrastructure.IoC.Modules
@@ -37,6 +39,22 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             
             builder.RegisterType<GetEduBlockForId>()
                 .As<IGetEduBlockForId>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<ChangePlatoonForPerson>()
+                .As<IChangePlatoonForPerson>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPlatoonInEduBlockForId>()
+                .As<IGetPlatoonInEduBlockForId>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPersonFunctionForId>()
+                .As<IGetPersonFunctionForId>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPersonAuthForId>()
+                .As<IGetPersonAuthForId>()
                 .InstancePerLifetimeScope();
         }
     }

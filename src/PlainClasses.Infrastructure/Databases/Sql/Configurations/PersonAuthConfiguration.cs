@@ -9,7 +9,10 @@ namespace PlainClasses.Infrastructure.Databases.Sql.Configurations
         public void Configure(EntityTypeBuilder<PersonAuth> builder)
         {
             builder.HasKey(x => x.Id);
-
+            builder.Property(x => x.Id)
+                .IsRequired()
+                .ValueGeneratedNever();
+            
             builder.HasOne(x => x.Person)
                 .WithMany(x => x.PersonAuths)
                 .HasForeignKey(x => x.PersonId);

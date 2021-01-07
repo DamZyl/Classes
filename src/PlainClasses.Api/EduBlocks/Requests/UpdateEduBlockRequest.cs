@@ -1,6 +1,6 @@
 using System;
 
-namespace PlainClasses.Api.EduBlocks
+namespace PlainClasses.Api.EduBlocks.Requests
 {
     public class UpdateEduBlockRequest
     {

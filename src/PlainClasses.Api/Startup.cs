@@ -12,6 +12,7 @@ using PlainClasses.Api.Utils;
 using PlainClasses.Api.Validations;
 using PlainClasses.Application.Configurations.Validation;
 using PlainClasses.Domain.Utils.SharedKernels;
+using PlainClasses.Infrastructure.Databases.Sql;
 using PlainClasses.Infrastructure.IoC;
 
 namespace PlainClasses.Api
@@ -27,8 +28,8 @@ namespace PlainClasses.Api
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // services.AddSqlConfiguration(Configuration, Consts.DbConfigurationSection);
-            // services.AddDbContext<PlainClassesContext>();
+            services.AddSqlConfiguration(Configuration, Consts.DbConfigurationSection);
+            services.AddDbContext<PlainClassesContext>();
             
             services.AddJwtConfiguration(Configuration, Consts.JwtConfigurationSection);
             services.AddControllers();

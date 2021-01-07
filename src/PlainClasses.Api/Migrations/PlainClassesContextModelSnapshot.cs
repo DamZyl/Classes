@@ -19,7 +19,7 @@ namespace PlainClasses.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.EduBlock", b =>
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.EduBlock", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("EduBlocks");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.EduBlockSubject", b =>
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.EduBlockSubject", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,51 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("EduBlockSubjects");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.MilitaryRank", b =>
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.PersonFunction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EduBlockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Function")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EduBlockId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("PersonFunctions");
+                });
+
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.PlatoonInEduBlock", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EduBlockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlatoonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EduBlockId");
+
+                    b.HasIndex("PlatoonId");
+
+                    b.ToTable("PlatoonInEduBlocks");
+                });
+
+            modelBuilder.Entity("PlainClasses.Domain.Persons.MilitaryRank", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +126,7 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("MilitaryRanks");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.Person", b =>
+            modelBuilder.Entity("PlainClasses.Domain.Persons.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,10 +195,9 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.PersonAuth", b =>
+            modelBuilder.Entity("PlainClasses.Domain.Persons.PersonAuth", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AuthName")
@@ -170,32 +213,7 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("PersonAuths");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.PersonFunction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EduBlockId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Function")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PersonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EduBlockId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonFunctions");
-                });
-
-            modelBuilder.Entity("PlainClasses.Domain.Models.Platoon", b =>
+            modelBuilder.Entity("PlainClasses.Domain.Platoons.Platoon", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,84 +233,63 @@ namespace PlainClasses.Api.Migrations
                     b.ToTable("Platoons");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.PlatoonInEduBlock", b =>
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.EduBlock", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EduBlockId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PlatoonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EduBlockId");
-
-                    b.HasIndex("PlatoonId");
-
-                    b.ToTable("PlatoonInEduBlocks");
-                });
-
-            modelBuilder.Entity("PlainClasses.Domain.Models.EduBlock", b =>
-                {
-                    b.HasOne("PlainClasses.Domain.Models.EduBlockSubject", "EduBlockSubject")
+                    b.HasOne("PlainClasses.Domain.EduBlocks.EduBlockSubject", "EduBlockSubject")
                         .WithMany("EduBlocks")
                         .HasForeignKey("EduBlockSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.Person", b =>
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.PersonFunction", b =>
                 {
-                    b.HasOne("PlainClasses.Domain.Models.MilitaryRank", "MilitaryRank")
+                    b.HasOne("PlainClasses.Domain.EduBlocks.EduBlock", "EduBlock")
+                        .WithMany("PersonFunctions")
+                        .HasForeignKey("EduBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlainClasses.Domain.Persons.Person", "Person")
+                        .WithMany("PersonFunctions")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlainClasses.Domain.EduBlocks.PlatoonInEduBlock", b =>
+                {
+                    b.HasOne("PlainClasses.Domain.EduBlocks.EduBlock", "EduBlock")
+                        .WithMany("Platoons")
+                        .HasForeignKey("EduBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PlainClasses.Domain.Platoons.Platoon", "Platoon")
+                        .WithMany("Platoons")
+                        .HasForeignKey("PlatoonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PlainClasses.Domain.Persons.Person", b =>
+                {
+                    b.HasOne("PlainClasses.Domain.Persons.MilitaryRank", "MilitaryRank")
                         .WithMany("Persons")
                         .HasForeignKey("MilitaryRankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PlainClasses.Domain.Models.Platoon", "Platoon")
+                    b.HasOne("PlainClasses.Domain.Platoons.Platoon", "Platoon")
                         .WithMany("Persons")
                         .HasForeignKey("PlatoonId");
                 });
 
-            modelBuilder.Entity("PlainClasses.Domain.Models.PersonAuth", b =>
+            modelBuilder.Entity("PlainClasses.Domain.Persons.PersonAuth", b =>
                 {
-                    b.HasOne("PlainClasses.Domain.Models.Person", "Person")
+                    b.HasOne("PlainClasses.Domain.Persons.Person", "Person")
                         .WithMany("PersonAuths")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PlainClasses.Domain.Models.PersonFunction", b =>
-                {
-                    b.HasOne("PlainClasses.Domain.Models.EduBlock", "EduBlock")
-                        .WithMany("PersonFunctions")
-                        .HasForeignKey("EduBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PlainClasses.Domain.Models.Person", "Person")
-                        .WithMany("PersonFunctions")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PlainClasses.Domain.Models.PlatoonInEduBlock", b =>
-                {
-                    b.HasOne("PlainClasses.Domain.Models.EduBlock", "EduBlock")
-                        .WithMany("Platoons")
-                        .HasForeignKey("EduBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PlainClasses.Domain.Models.Platoon", "Platoon")
-                        .WithMany("Platoons")
-                        .HasForeignKey("PlatoonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

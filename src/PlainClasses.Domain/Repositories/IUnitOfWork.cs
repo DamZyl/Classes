@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using PlainClasses.Domain.Utils.SharedKernels;
 
 namespace PlainClasses.Domain.Repositories
@@ -7,7 +8,7 @@ namespace PlainClasses.Domain.Repositories
     {
         IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class, IAggregateRoot;
 
-        Task<int> CommitAsync();
+        Task<int> CommitAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         void Rollback();
     }

@@ -27,7 +27,7 @@ namespace PlainClasses.Application.EduBlocks.Commands.CreateEduBlock
                 request.Remarks, request.Place, request.PlatoonIds, _getEduBlockSubjectForId, _getPlatoonsForIds);
 
             await _unitOfWork.Repository<EduBlock>().AddAsync(eduBlock);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return new ReturnEduBlockViewModel { Id = eduBlock.Id };
         }

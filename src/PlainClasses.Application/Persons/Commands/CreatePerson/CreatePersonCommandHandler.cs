@@ -31,7 +31,7 @@ namespace PlainClasses.Application.Persons.Commands.CreatePerson
                 request.PersonalPhoneNumber, request.Position, _passwordHasher, _getMilitaryRankForId, _getPlatoonForId);
 
             await _unitOfWork.Repository<Person>().AddAsync(person);
-            await _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return new ReturnPersonViewModel { Id = person.Id };
         }
