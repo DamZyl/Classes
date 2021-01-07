@@ -33,5 +33,7 @@ namespace PlainClasses.Application.Platoons.DomainServices
                 person.ChangePlatoon(platoon);
             }
         }
+
+        public void ChangePlatoon(Person person) => person.ChangePlatoon();
     }
 }

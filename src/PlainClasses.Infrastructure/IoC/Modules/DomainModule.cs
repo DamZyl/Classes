@@ -52,6 +52,10 @@ namespace PlainClasses.Infrastructure.IoC.Modules
             builder.RegisterType<GetPersonFunctionForId>()
                 .As<IGetPersonFunctionForId>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<GetPersonAuthForId>()
+                .As<IGetPersonAuthForId>()
+                .InstancePerLifetimeScope();
         }
     }
 }

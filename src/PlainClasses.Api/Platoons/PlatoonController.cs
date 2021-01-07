@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlainClasses.Api.Platoons.Requests;
 using PlainClasses.Application.Platoons.Commands.AddPerson;
 using PlainClasses.Application.Platoons.Commands.CreatePlatoon;
+using PlainClasses.Application.Platoons.Commands.DeletePerson;
 using PlainClasses.Application.Platoons.Commands.DeletePlatoon;
 using PlainClasses.Application.Platoons.Commands.UpdatePlatoon;
 using PlainClasses.Application.Platoons.Queries.GetPlatoon;
@@ -81,6 +82,16 @@ namespace PlainClasses.Api.Platoons
         public async Task<IActionResult> DeletePlatoon(Guid id)
         {
             await _mediator.Send(new DeletePlatoonCommand(id));
+
+            return NoContent();
+        }
+        
+        [Route("{id}/person/{personId}")]
+        [HttpDelete]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeletePersonFromPlatoon(Guid id, Guid personId)
+        {
+            await _mediator.Send(new DeletePersonFromPlatoonCommand(id, personId));
 
             return NoContent();
         }

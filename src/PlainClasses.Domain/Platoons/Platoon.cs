@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PlainClasses.Domain.EduBlocks;
 using PlainClasses.Domain.Persons;
 using PlainClasses.Domain.Platoons.DomainServices;
@@ -58,6 +59,19 @@ namespace PlainClasses.Domain.Platoons
             _persons.Add(person);
             
             AddDomainEvent(new PersonToPlatoonAddedEvent(Id, person.Id));
+        }
+        
+        public void DeletePersonFromPlatoon(Guid personId, IGetPersonForId getPersonForId, 
+            IChangePlatoonForPerson changePlatoonForPerson)
+        {
+            var person = getPersonForId.GetDetail(personId);
+            CheckRule(new PersonExistRule(person));
+            CheckRule(new PersonExistsInPlatoonRule(_persons, person.Id));
+            
+            changePlatoonForPerson.ChangePlatoon(person);
+            _persons.Remove(_persons.Single(x => x.Id == person.Id));
+            
+            AddDomainEvent(new PersonFromPlatoonDeletedEvent(Id, person.Id));
         }
     }
 }

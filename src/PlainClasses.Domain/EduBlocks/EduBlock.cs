@@ -135,7 +135,7 @@ namespace PlainClasses.Domain.EduBlocks
             
             _personFunctions.Remove(_personFunctions.Single(x => x.Id == functionPerson.Id));
             
-            AddDomainEvent(new PersonFunctionFromEduBlockRemovedEvent(Id, functionId));
+            AddDomainEvent(new PersonFunctionFromEduBlockDeletedEvent(Id, functionId));
         }
         
         private void AddPlatoonToEduBlock(Platoon platoon)

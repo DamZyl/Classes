@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PlainClasses.Domain.EduBlocks;
 using PlainClasses.Domain.Persons.DomainServices;
 using PlainClasses.Domain.Persons.Enums;
@@ -160,6 +161,12 @@ namespace PlainClasses.Domain.Persons
             PlatoonId = platoon.Id;
             PlatoonAcr = platoon.Acronym;
         }
+        
+        public void ChangePlatoon()
+        {
+            PlatoonId = null;
+            PlatoonAcr = null;
+        }
 
         public void AddAuthToPerson(string authName)
         {
@@ -169,6 +176,17 @@ namespace PlainClasses.Domain.Persons
             _personAuths.Add(auth);
             
             AddDomainEvent(new PersonAuthAddedEvent(Id, authName));
+        }
+        
+        public void DeleteAuthFromPerson(Guid authId, IGetPersonAuthForId getPersonAuthForId)
+        {
+            var personAuth = getPersonAuthForId.Get(authId);
+            CheckRule(new PersonAuthExistRule(personAuth));
+            CheckRule(new PersonAuthExistsInPersonRule(PersonAuths, personAuth.Id));
+            
+            _personAuths.Remove(_personAuths.Single(x => x.Id == personAuth.Id));
+            
+            AddDomainEvent(new PersonAuthDeletedEvent(Id, personAuth.Id));
         }
     }
 }
